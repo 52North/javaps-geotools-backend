@@ -78,7 +78,7 @@ public class JTSCoordinationTransformationAlgorithm {
 
     @Execute
     public void runAlgorithm() {
-        
+
         // 1. decode target CRS by epsg code:
         CoordinateReferenceSystem toCRS = null;
         try {
@@ -95,7 +95,7 @@ public class JTSCoordinationTransformationAlgorithm {
             throw new RuntimeException(
                     "Could not determine target CRS. Valid EPSG code needed.");
         }
-        
+
         // 2. decode source CRS by epsg code:
         CoordinateReferenceSystem fromCRS = null;
         try {
@@ -153,7 +153,7 @@ public class JTSCoordinationTransformationAlgorithm {
         } catch (Exception e) {
             throw new RuntimeException("Error while transforming", e);
         }
-        
+
         this.result = fOut;
     }
 

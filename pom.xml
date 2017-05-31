@@ -185,6 +185,7 @@
             <artifactId>gt-epsg-hsql</artifactId>
             <groupId>org.geotools</groupId>
             <version>8.7</version>
+            <scope>runtime</scope>
         </dependency>
         <!--
         <dependency>

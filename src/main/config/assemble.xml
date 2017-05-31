@@ -29,7 +29,7 @@
 		<dependencySet>
 			<includes>
 				<include>com.vividsolutions:jts</include>
-				<include>org.n52.geoprocessing:javaps-jts-backend</include>
+				<include>org.n52.geoprocessing:javaps-geotools-backend</include>
 			</includes>
 			<outputDirectory>deploy-to-javaps</outputDirectory>
 		</dependencySet>

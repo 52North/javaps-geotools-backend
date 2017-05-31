@@ -1,49 +1,18 @@
-/**
- * ﻿Copyright (C) 2007 - 2016 52°North Initiative for Geospatial Open Source
+/*
+ * Copyright 2016 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License version 2 as published
- * by the Free Software Foundation.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * If the program is linked with libraries which are licensed under one of
- * the following licenses, the combination of the program with the linked
- * library is not considered a "derivative work" of the program:
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *       • Apache License, version 2.0
- *       • Apache Software License, version 1.0
- *       • GNU Lesser General Public License, version 3
- *       • Mozilla Public License, versions 1.0, 1.1 and 2.0
- *       • Common Development and Distribution License (CDDL), version 1.0
- *
- * Therefore the distribution of the program linked with libraries licensed
- * under the aforementioned licenses, is permitted by the copyright holders
- * if the distribution is compliant with both the GNU General Public
- * License version 2 and the aforementioned licenses.
- *
- * As an exception to the terms of the GPL, you may copy, modify,
- * propagate, and distribute a work formed by combining 52°North WPS
- * GeoTools Modules with the Eclipse Libraries, or a work derivative of
- * such a combination, even if such copying, modification, propagation, or
- * distribution would otherwise violate the terms of the GPL. Nothing in
- * this exception exempts you from complying with the GPL in all respects
- * for all of the code used other than the Eclipse Libraries. You may
- * include this exception and its grant of permissions when you distribute
- * 52°North WPS GeoTools Modules. Inclusion of this notice with such a
- * distribution constitutes a grant of such permissions. If you do not wish
- * to grant these permissions, remove this paragraph from your
- * distribution. "52°North WPS GeoTools Modules" means the 52°North WPS
- * modules using GeoTools functionality - software licensed under version 2
- * or any later version of the GPL, or a work based on such software and
- * licensed under the GPL. "Eclipse Libraries" means Eclipse Modeling
- * Framework Project and XML Schema Definition software distributed by the
- * Eclipse Foundation and licensed under the Eclipse Public License Version
- * 1.0 ("EPL"), or a work based on such software and licensed under the EPL.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.n52.geoprocessing.jts.io.data.binding.complex;
 
@@ -88,30 +57,30 @@ import com.vividsolutions.jts.geom.Polygon;
 
 public class GTHelper {
 	private static Logger LOGGER = LoggerFactory.getLogger(GTHelper.class);
-	
+
 	public static SimpleFeatureType createFeatureType(Collection<Property> attributes, Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem){
 		String namespace = "http://www.52north.org/"+uuid;
-		
+
 		SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
 		if(coordinateReferenceSystem==null){
-			coordinateReferenceSystem= getDefaultCRS();			
+			coordinateReferenceSystem= getDefaultCRS();
 		}
 		typeBuilder.setCRS(coordinateReferenceSystem);
 		typeBuilder.setNamespaceURI(namespace);
 		Name nameType = new NameImpl(namespace, "Feature-"+uuid);
 		typeBuilder.setName(nameType);
-		
+
 		for(Property property : attributes){
-			if(property.getValue()!=null){ 
+			if(property.getValue()!=null){
 				String name = property.getName().getLocalPart();
 				Class<?> binding = property.getType().getBinding();
 				if(binding.equals(Envelope.class)){
 					continue;
 				}
-				if( 
+				if(
 				   (binding.equals(Geometry.class) ||
 				    binding.equals(GeometryCollection.class) ||
-				   binding.equals(MultiCurve.class) || 
+				   binding.equals(MultiCurve.class) ||
 				   binding.equals(MultiLineString.class) ||
 				   binding.equals(Curve.class) ||
 				   binding.equals(MultiPoint.class) ||
@@ -120,17 +89,17 @@ public class GTHelper {
 				   binding.equals(LineString.class) ||
 				   binding.equals(Point.class) ||
 				   binding.equals(LineString.class) ||
-				   binding.equals(Polygon.class)) 				  
+				   binding.equals(Polygon.class))
 				 &&!name.equals("location")){
-									   
-					
+
+
 					if(newGeometry.getClass().equals(Point.class) && (!name.equals("location"))){
 						typeBuilder.add("GEOMETRY", MultiPoint.class);
 					}else if(newGeometry.getClass().equals(LineString.class) && (!name.equals("location"))){
-					
+
 						typeBuilder.add("GEOMETRY", MultiLineString.class);
 					}else if( newGeometry.getClass().equals(Polygon.class) && (!name.equals("location"))){
-					
+
 						typeBuilder.add("GEOMETRY", MultiPolygon.class);
 					}else if(!binding.equals(Object.class)){
 						typeBuilder.add("GEOMETRY", newGeometry.getClass());
@@ -142,39 +111,39 @@ public class GTHelper {
 							if(g.getClass().equals(Point.class) && (!name.equals("location"))){
 								typeBuilder.add("GEOMETRY", MultiPoint.class);
 							}else if(g.getClass().equals(LineString.class) && (!name.equals("location"))){
-							
+
 								typeBuilder.add("GEOMETRY", MultiLineString.class);
 							}else if( g.getClass().equals(Polygon.class) && (!name.equals("location"))){
-							
+
 								typeBuilder.add("GEOMETRY", MultiPolygon.class);
 							}else{
 								typeBuilder.add("GEOMETRY", g.getClass());
 							}
-							
+
 						}catch(ClassCastException e){
-							
+
 						}
-						
+
 					}else if(!name.equals("location")){
 						typeBuilder.add(name, binding);
 					}
 				}
 			}
-		
-		 
+
+
 		}
-		
+
 		SimpleFeatureType featureType;
-		
+
 		featureType = typeBuilder.buildFeatureType();
 		return featureType;
 	}
-	
-	
-	
+
+
+
 	public static SimpleFeatureType createFeatureType(Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem){
 		String namespace = "http://www.52north.org/"+uuid;
-		
+
 		SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
 		if(coordinateReferenceSystem==null){
 			coordinateReferenceSystem= getDefaultCRS();
@@ -182,28 +151,28 @@ public class GTHelper {
 		typeBuilder.setCRS(coordinateReferenceSystem);
 		typeBuilder.setNamespaceURI(namespace);
 		Name nameType = new NameImpl(namespace, "Feature-"+uuid);
-		typeBuilder.setName(nameType);		
-					
+		typeBuilder.setName(nameType);
+
 		typeBuilder.add("GEOMETRY", newGeometry.getClass());
-					
+
 		SimpleFeatureType featureType;
-		
+
 		featureType = typeBuilder.buildFeatureType();
 		return featureType;
 	}
-	
+
 	public static SimpleFeature createFeature(String id, Geometry geometry, SimpleFeatureType featureType, Collection<Property> originalAttributes) {
-		
+
 			if(geometry==null || geometry.isEmpty()){
 				return null;
 			}
-			
+
 			SimpleFeatureBuilder featureBuilder = new SimpleFeatureBuilder(featureType);
 			SimpleFeature feature = null;
 			Collection<PropertyDescriptor> featureTypeAttributes = featureType.getDescriptors();
-						
+
 			Object[] newData = new Object[featureType.getDescriptors().size()];
-			
+
 			int i = 0;
 			for(PropertyDescriptor propertyDescriptor : featureTypeAttributes){
 				for(Property originalProperty : originalAttributes){
@@ -215,7 +184,7 @@ public class GTHelper {
 						}
 					}
 				}
-				
+
 				if(propertyDescriptor instanceof GeometryDescriptor){
 					if(geometry.getGeometryType().equals("Point")){
 						Point[] points = new Point[1];
@@ -234,31 +203,31 @@ public class GTHelper {
 							}else{
 								newData[i] = geometry;
 							}
-					
+
 				}
 				i++;
 			}
-				
-		
-			
+
+
+
 			feature = featureBuilder.buildFeature(id, newData);
-		
+
 			return feature;
 	}
-	
+
 	public static Feature createFeature(String id, Geometry geometry, SimpleFeatureType featureType) {
-		
+
 		if(geometry==null || geometry.isEmpty()){
 			return null;
 		}
-		
+
 		SimpleFeatureBuilder featureBuilder = new SimpleFeatureBuilder(featureType);
 		SimpleFeature feature = null;
-					
+
 		Object[] newData = new Object[featureType.getDescriptors().size()];
-		
+
 		int i = 0;
-	
+
 		if(geometry.getGeometryType().equals("Point")){
 			Point[] points = new Point[1];
 			points[0] = (Point)geometry;
@@ -276,15 +245,15 @@ public class GTHelper {
 				}else{
 					newData[i] = geometry;
 				}
-			
-		
+
+
 		feature = featureBuilder.buildFeature(id, newData);
-	
+
 		return feature;
 }
-                
+
 		public static QName createGML3SchemaForFeatureType(SimpleFeatureType featureType){
-		
+
 		String uuid = featureType.getName().getNamespaceURI().replace("http://www.52north.org/", "");
 		String namespace = "http://www.52north.org/"+uuid;
 		String schema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><xs:schema targetNamespace=\""+namespace+"\" " +
@@ -295,45 +264,45 @@ public class GTHelper {
 				"version=\"1.0\"> "+
 				"<xs:import namespace=\"http://www.opengis.net/gml\" "+
 				"schemaLocation=\"http://schemas.opengis.net/gml/3.1.1/base/gml.xsd\"/> ";
-				
+
 		String typeName = featureType.getGeometryDescriptor().getType().getBinding().getName();
 		String geometryTypeName = "";
 		if(typeName.contains("Point")){
 	    	geometryTypeName = "PointPropertyType";
 	    }
-	  	     
+
 		 if(typeName.contains("MultiPoint")){
-			 geometryTypeName = "MultiPointPropertyType";	
+			 geometryTypeName = "MultiPointPropertyType";
 					    }
 		 if(typeName.contains("LineString")){
-			 geometryTypeName = "CurvePropertyType";	
+			 geometryTypeName = "CurvePropertyType";
 		 }
 		 if(typeName.contains("MultiLineString")){
-			 geometryTypeName = "MultiCurvePropertyType";	
+			 geometryTypeName = "MultiCurvePropertyType";
 		 }
 		 if(typeName.contains("Polygon")){
-			 geometryTypeName = "SurfacePropertyType";	
+			 geometryTypeName = "SurfacePropertyType";
 		 }
 		 if(typeName.contains("MultiPolygon")){
-			 geometryTypeName = "MultiSurfacePropertyType";	
-		 }		
-				
+			 geometryTypeName = "MultiSurfacePropertyType";
+		 }
+
 				// add feature type definition and generic geometry
 			schema = schema + "<xs:element name=\"Feature-"+uuid+"\" type=\"n52:FeatureType\" substitutionGroup=\"gml:_Feature\"/> " +
 					"<xs:complexType name=\"FeatureType\"> " +
 					"<xs:complexContent> " +
 					"<xs:extension base=\"gml:AbstractFeatureType\"> "+
 					"<xs:sequence> " +
-					//"<xs:element name=\"GEOMETRY\" type=\"gml:GeometryPropertyType\"> "+					
+					//"<xs:element name=\"GEOMETRY\" type=\"gml:GeometryPropertyType\"> "+
 					"<xs:element name=\"GEOMETRY\" type=\"gml:"+geometryTypeName+"\"> "+
 					"</xs:element> ";
-			
+
 			//add attributes
 			Collection<PropertyDescriptor> attributes = featureType.getDescriptors();
 			for(PropertyDescriptor property : attributes){
 				String attributeName = property.getName().getLocalPart();
 				if(!(property instanceof GeometryDescriptor)){
-					
+
 					if(property.getType().getBinding().equals(String.class) ){
 						schema = schema + "<xs:element name=\""+attributeName+"\" minOccurs=\"0\" maxOccurs=\"1\"> "+
 						"<xs:simpleType> ";
@@ -357,8 +326,8 @@ public class GTHelper {
 						"</xs:element> ";
 					}
 				}
-			}		
-			
+			}
+
 			//close
 			schema = schema +  "</xs:sequence> "+
 		      "</xs:extension> "+
@@ -368,17 +337,17 @@ public class GTHelper {
 			String schemalocation = "";
 			try {
 				schemalocation = storeSchema(schema, uuid);
-				
+
 			} catch (IOException e) {
 				LOGGER.error("Exception while storing schema.", e);
 				throw new RuntimeException("Exception while storing schema.", e);
 			}
 			return new QName(namespace, schemalocation);
-			
+
 		}
 		/*
 		public static QName createGML2SchemaForFeatureType(SimpleFeatureType featureType){
-			
+
 			String uuid = featureType.getName().getNamespaceURI().replace("http://www.52north.org/", "");
 			String namespace = "http://www.52north.org/"+uuid;
 			String schema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><xs:schema targetNamespace=\""+namespace+"\" " +
@@ -389,7 +358,7 @@ public class GTHelper {
 					"version=\"1.0\"> "+
 					"<xs:import namespace=\"http://www.opengis.net/gml\" "+
 					"schemaLocation=\"http://schemas.opengis.net/gml/2.1.2/feature.xsd\"/> ";
-				
+
 					// add feature type definition and generic geometry
 				schema = schema + "<xs:element name=\"Feature\" type=\"n52:FeatureType\" substitutionGroup=\"gml:_Feature\"/> " +
 						"<xs:complexType name=\"FeatureType\"> " +
@@ -398,13 +367,13 @@ public class GTHelper {
 						"<xs:sequence> " +
 						"<xs:element name=\"GEOMETRY\" type=\"gml:GeometryPropertyType\"> "+
 						"</xs:element> ";
-				
+
 				//add attributes
 				Collection<PropertyDescriptor> attributes = featureType.getDescriptors();
 				for(PropertyDescriptor property : attributes){
 					String attributeName = property.getName().getLocalPart();
 					if(!(property instanceof GeometryDescriptor)){
-						
+
 						if(property.getType().getBinding().equals(String.class) ){
 							schema = schema + "<xs:element name=\""+attributeName+"\" minOccurs=\"0\" maxOccurs=\"1\"> "+
 							"<xs:simpleType> ";
@@ -428,8 +397,8 @@ public class GTHelper {
 							"</xs:element> ";
 						}
 					}
-				}		
-				
+				}
+
 				//close
 				schema = schema +  "</xs:sequence> "+
 			      "</xs:extension> "+
@@ -439,24 +408,24 @@ public class GTHelper {
 				String schemalocation = "";
 				try {
 					schemalocation = storeSchema(schema, uuid);
-					
+
 				} catch (IOException e) {
 					LOGGER.error("Exception while storing schema.", e);
 					throw new RuntimeException("Exception while storing schema.", e);
 				}
 				return new QName(namespace, schemalocation);
-				
+
 			}*/
 
 		public static String storeSchema(String schema, String uuid) throws IOException {
-			
+
 			//String domain = WPSConfig.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 			String domain = "";
 			domain = URLDecoder.decode(domain, "UTF-8");
-			
+
 			int startIndex = domain.indexOf("WEB-INF");
 			if(startIndex<0){
-				//not running as webapp				
+				//not running as webapp
 				File f = File.createTempFile(uuid, ".xsd");
 				f.deleteOnExit();
 				FileWriter writer = new FileWriter(f);
@@ -465,9 +434,9 @@ public class GTHelper {
 				writer.close();
 				return "file:"+f.getAbsolutePath();
 			}else{
-				domain = domain.substring(0,startIndex);			
+				domain = domain.substring(0,startIndex);
 				String baseDirLocation = domain;
-			
+
 				String baseDir = baseDirLocation +  "schemas" + File.separator;
 				File folder = new File(baseDir);
 				if(!folder.exists()){
@@ -478,25 +447,25 @@ public class GTHelper {
 				writer.write(schema);
 				writer.flush();
 				writer.close();
-				
+
 				//String url = WPSConfig.getServerBaseURL()+"/schemas/"+ uuid+".xsd";
                                 String url = "/schemas/"+ uuid+".xsd";
 				return url;
 			}
 		}
-		
+
 		private static CoordinateReferenceSystem getDefaultCRS(){
 
 			try {
-				return CRS.decode("EPSG:4326");
+				return CRS.decode(":4326");
 			} catch (Exception e) {
-				LOGGER.error("Exception while decoding CRS EPSG:4326", e);
+				LOGGER.error("Exception while decoding CRS :4326", e);
 			}
 			return null;
 		}
-		
-		public static SrsSyntax getSrsSyntaxFromString(String syntaxString){		    
-		    return SrsSyntax.valueOf(syntaxString);		    
+
+		public static SrsSyntax getSrsSyntaxFromString(String syntaxString){
+		    return SrsSyntax.valueOf(syntaxString);
 		}
 
 }
