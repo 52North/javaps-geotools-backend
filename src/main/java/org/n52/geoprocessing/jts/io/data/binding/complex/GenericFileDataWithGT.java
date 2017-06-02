@@ -16,6 +16,8 @@
  */
 package org.n52.geoprocessing.jts.io.data.binding.complex;
 
+import org.n52.geoprocessing.jts.io.datahandler.parser.GML2BasicParser;
+import org.n52.geoprocessing.jts.io.datahandler.parser.GML3BasicParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

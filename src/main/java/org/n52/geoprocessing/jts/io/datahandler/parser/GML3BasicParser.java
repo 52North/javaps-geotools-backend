@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.io.data.binding.complex;
+package org.n52.geoprocessing.jts.io.datahandler.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,12 +25,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.xml.namespace.QName;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.geotools.data.collection.ListFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.feature.DefaultFeatureCollections;
@@ -50,14 +50,20 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.GeometryDescriptor;
 import org.opengis.feature.type.GeometryType;
 import org.opengis.filter.identity.Identifier;
-import org.xml.sax.helpers.DefaultHandler;
 
+import org.xml.sax.helpers.DefaultHandler;
 import com.vividsolutions.jts.geom.Geometry;
+
+import org.n52.geoprocessing.jts.io.data.binding.complex.GML2Handler;
+import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.jts.io.data.binding.complex.SchemaRepository;
+
+import org.n52.javaps.annotation.Properties;
 import org.n52.javaps.description.TypedProcessInputDescription;
 import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
-import org.n52.javaps.io.Data;
 import org.n52.javaps.io.DecodingException;
 import org.n52.javaps.io.InputHandler;
+
 import org.n52.shetland.ogc.wps.Format;
 
 /**
@@ -66,6 +72,8 @@ import org.n52.shetland.ogc.wps.Format;
  * @author schaeffer
  *
  */
+@Properties(
+        defaultPropertyFileName = "wkt.properties")
 public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implements InputHandler {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GML3BasicParser.class);

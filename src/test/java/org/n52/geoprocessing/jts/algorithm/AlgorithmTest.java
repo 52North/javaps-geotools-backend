@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GML3BasicParser;
+import org.n52.geoprocessing.jts.io.datahandler.parser.GML3BasicParser;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
