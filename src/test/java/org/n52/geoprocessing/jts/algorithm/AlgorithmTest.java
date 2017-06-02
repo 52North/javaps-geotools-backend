@@ -33,6 +33,10 @@ import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ * @author Maurin Radtke (m.radtke@52north.org)
+ */
 public class AlgorithmTest {
 
     Logger LOGGER = LoggerFactory.getLogger(AlgorithmTest.class);

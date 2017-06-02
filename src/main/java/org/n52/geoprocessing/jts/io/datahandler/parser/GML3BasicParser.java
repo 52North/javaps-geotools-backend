@@ -73,7 +73,7 @@ import org.n52.shetland.ogc.wps.Format;
  *
  */
 @Properties(
-        defaultPropertyFileName = "wkt.properties")
+        defaultPropertyFileName = "gml.properties")
 public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implements InputHandler {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GML3BasicParser.class);
