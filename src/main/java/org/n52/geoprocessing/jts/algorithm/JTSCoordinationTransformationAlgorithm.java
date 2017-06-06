@@ -72,7 +72,7 @@ public class JTSCoordinationTransformationAlgorithm {
     }
 
     @ComplexOutput(identifier = "result", binding = GTVectorDataBinding.class)
-    public FeatureCollection<?, ?> getResult() {
+    public FeatureCollection getResult() {
         return result;
     }
 
