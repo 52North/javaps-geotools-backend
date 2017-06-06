@@ -16,11 +16,8 @@
  */
 package org.n52.geoprocessing.jts.io.data.binding.complex;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
 
 import org.geotools.feature.FeatureCollection;
 import org.n52.javaps.io.complex.ComplexData;
@@ -30,13 +27,14 @@ import org.n52.javaps.io.complex.ComplexData;
 
 public class GTVectorDataBinding implements ComplexData<FeatureCollection> {
 
+
     protected transient FeatureCollection<?, ?> featureCollection;
 
     public GTVectorDataBinding(FeatureCollection<?, ?> payload) {
         this.featureCollection = payload;
     }
 
-    public Class<FeatureCollection> getSupportedClass() {
+    public Class<?> getSupportedClass() {
         return FeatureCollection.class;
     }
 

@@ -48,16 +48,17 @@ import org.n52.geoprocessing.jts.io.data.binding.complex.GTHelper;
 import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.geoprocessing.jts.io.data.binding.complex.SchemaRepository;
 import org.n52.javaps.annotation.Properties;
-import org.n52.javaps.description.TypedProcessInputDescription;
 import org.n52.javaps.description.TypedProcessOutputDescription;
 import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
 import org.n52.javaps.io.Data;
-import org.n52.javaps.io.DecodingException;
 import org.n52.javaps.io.EncodingException;
-import org.n52.javaps.io.InputHandler;
 import org.n52.javaps.io.OutputHandler;
 import org.n52.shetland.ogc.wps.Format;
 
+/**
+ * This class generates
+ * @author Maurin Radtke (m.radtke@52north.org)
+ */
 @Properties(
         defaultPropertyFileName = "gml.properties")
 public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler implements OutputHandler {
@@ -188,10 +189,12 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
         }
         String uuid = UUID.randomUUID().toString();
         File file = File.createTempFile("gml3" + uuid, ".xml");
-        FileOutputStream outputStream = new FileOutputStream(file);
-        this.writeToStream( ((GTVectorDataBinding) data).getPayload() , outputStream);
-        outputStream.flush();
-        outputStream.close();
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            this.writeToStream( ((GTVectorDataBinding) data).getPayload() , outputStream);
+            outputStream.flush();
+        } catch (Exception e){
+            throw new RuntimeException("error while generating stream: " + e.getMessage());
+        }
         if (file.length() <= 0) {
             return null;
         }

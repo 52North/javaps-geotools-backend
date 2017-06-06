@@ -114,7 +114,7 @@ public class AlgorithmTest {
 
         try {
             algo.runAlgorithm();
-            FeatureCollection fc = algo.getOutput();
+            FeatureCollection fc = algo.getResult();
             FeatureIterator<?> featureIterator = fc.features();
             SimpleFeature feature = (SimpleFeature) featureIterator.next();
             Geometry geometry = (Geometry) feature.getDefaultGeometry();
@@ -143,7 +143,7 @@ public class AlgorithmTest {
 
         try {
             algo.runAlgorithm();
-            FeatureCollection fc = algo.getOutput();
+            FeatureCollection fc = algo.getResult();
             FeatureIterator<?> featureIterator = fc.features();
             SimpleFeature feature = (SimpleFeature) featureIterator.next();
             Geometry geometry = (Geometry) feature.getDefaultGeometry();
