@@ -48,13 +48,19 @@ import org.n52.geoprocessing.jts.io.data.binding.complex.GTHelper;
 import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.geoprocessing.jts.io.data.binding.complex.SchemaRepository;
 import org.n52.javaps.annotation.Properties;
+import org.n52.javaps.description.TypedProcessInputDescription;
 import org.n52.javaps.description.TypedProcessOutputDescription;
+import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
 import org.n52.javaps.io.Data;
+import org.n52.javaps.io.DecodingException;
+import org.n52.javaps.io.EncodingException;
+import org.n52.javaps.io.InputHandler;
+import org.n52.javaps.io.OutputHandler;
 import org.n52.shetland.ogc.wps.Format;
 
 @Properties(
         defaultPropertyFileName = "gml.properties")
-public class GML3BasicGenerator {
+public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler implements OutputHandler {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GML3BasicGenerator.class);
 
@@ -62,6 +68,7 @@ public class GML3BasicGenerator {
 
     public GML3BasicGenerator() {
         super();
+        addSupportedBinding(GTVectorDataBinding.class);
 //        Property[] properties = WPSConfig.getInstance().getPropertiesForGeneratorClass(this.getClass().getCanonicalName());
 //
 //        for (Property property : properties) {
@@ -172,6 +179,25 @@ public class GML3BasicGenerator {
 
         return inputStream;
 
+    }
+
+    @Override
+    public InputStream generate(TypedProcessOutputDescription<?> description, Data<?> data, Format format) throws IOException, EncodingException {
+        if (data instanceof GTVectorDataBinding) {
+
+        }
+        String uuid = UUID.randomUUID().toString();
+        File file = File.createTempFile("gml3" + uuid, ".xml");
+        FileOutputStream outputStream = new FileOutputStream(file);
+        this.writeToStream( ((GTVectorDataBinding) data).getPayload() , outputStream);
+        outputStream.flush();
+        outputStream.close();
+        if (file.length() <= 0) {
+            return null;
+        }
+        FileInputStream inputStream = new FileInputStream(file);
+
+        return inputStream;
     }
 
 }

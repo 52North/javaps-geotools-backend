@@ -80,7 +80,7 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
 
     public GML3BasicParser() {
         super();
-        //supportedIDataTypes.add(GTVectorDataBinding.class);
+        addSupportedBinding(GTVectorDataBinding.class);
     }
 
     /**
