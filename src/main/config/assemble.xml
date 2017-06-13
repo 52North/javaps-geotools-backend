@@ -30,7 +30,7 @@
         <dependencySet>
             <includes>
                 <include>org.apache.httpcomponents:httpcore</include>
-                <include>org.apache.commons:commons-io</include>
+                <include>commons-io:commons-io</include>
                 <include>org.geotools:gt-api</include>
                 <include>org.geotools:gt-main</include>
                 <include>org.geotools:gt-opengis</include>
@@ -40,16 +40,16 @@
                 <include>org.geotools.xsd:gt-xsd-gml2</include>
                 <include>org.geotools.xsd:gt-xsd-gml3</include>
                 <include>xalan:xalan</include>
-                <include>xml-apisxml-apis:</include>
+                <include>xml-apis:xml-apis:</include>
                 <include>org.eclipse.emf:common</include>
-                <include>org.apache.commons.collections:commons-collections</include>
+                <include>commons-collections:commons-collections</include>
                 <include>commons-jxpath:commons-jxpath</include>
                 <include>commons-pool:commons-pool</include>
                 <include>org.eclipse.emf:ecore</include>
                 <include>org.geotools:gt-data</include>
                 <include>org.geotools:gt-graph</include>
                 <include>org.geotools:gt-metadata</include>
-                <include>javax.media:jai-core</include>
+                <include>javax.media:jai_core</include>
                 <include>jdom:jdom</include>
                 <include>jgridshift:jgridshift</include>
                 <include>net.java.dev.jsr-275:jsr-275</include>
