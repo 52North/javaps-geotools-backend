@@ -27,6 +27,10 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<dependencySets>
 		<dependencySet>
+                    <dependency>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpcore</artifactId>
+                    </dependency>
 			<includes>
 				<include>com.vividsolutions:jts</include>
 				<include>org.n52.geoprocessing:javaps-geotools-backend</include>
