@@ -187,6 +187,12 @@
             <version>8.7</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <artifactId>hsqldb</artifactId>
+            <groupId>hsqldb</groupId>
+            <version>1.8.0.7</version>
+            <scope>runtime</scope>
+        </dependency>
         <!--
         <dependency>
             <groupId>org.geotools.xsd</groupId>
