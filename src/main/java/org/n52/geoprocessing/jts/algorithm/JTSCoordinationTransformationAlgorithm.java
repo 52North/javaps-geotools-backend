@@ -18,8 +18,11 @@ package org.n52.geoprocessing.jts.algorithm;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import org.geotools.data.collection.ListFeatureCollection;
 import org.geotools.feature.DefaultFeatureCollections;
 import org.n52.javaps.algorithm.annotation.Algorithm;
 import org.n52.javaps.algorithm.annotation.LiteralInput;
@@ -37,6 +40,8 @@ import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
+import org.opengis.feature.type.FeatureType;
+import org.opengis.filter.Filter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
@@ -116,7 +121,9 @@ public class JTSCoordinationTransformationAlgorithm {
         // 3. Transform featureCollection:
         FeatureIterator<?> featureIterator = this.data.features();
 
-        FeatureCollection fOut = DefaultFeatureCollections.newCollection();
+        List<SimpleFeature> listOut = new ArrayList();
+        SimpleFeatureType ft = null;
+
         this.result = DefaultFeatureCollections.newCollection();
 
         try {
@@ -145,16 +152,20 @@ public class JTSCoordinationTransformationAlgorithm {
                 Feature newFeature = createFeature(feature.getID(),
                         newGeometry, toCRS, feature.getProperties());
 
-                fOut.add(newFeature);
+                ft = ((SimpleFeature) newFeature).getType();
+                listOut.add((SimpleFeature) newFeature);
             }
 
         } catch (TransformException te) {
             throw new RuntimeException("Error while transforming: " + te.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error while transforming", e);
+            throw new RuntimeException("Exception while transforming: " + e.getMessage(),  e);
         }
 
-        this.result = fOut;
+        ListFeatureCollection lfc = new ListFeatureCollection(ft, listOut);
+
+        this.result = lfc.subCollection(Filter.INCLUDE);
+
     }
 
     private Feature createFeature(String id, Geometry geometry,

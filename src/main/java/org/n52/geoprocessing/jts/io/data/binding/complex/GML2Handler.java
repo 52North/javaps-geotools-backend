@@ -70,7 +70,6 @@ public class GML2Handler extends DefaultHandler {
                 schemaUrl = locationStrings[i + 1];
                 return;
             }
-
         }
     }
 

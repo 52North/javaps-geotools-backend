@@ -53,6 +53,7 @@ import org.opengis.filter.identity.Identifier;
 
 import org.xml.sax.helpers.DefaultHandler;
 import com.vividsolutions.jts.geom.Geometry;
+import org.geotools.xml.Parser;
 
 import org.n52.geoprocessing.jts.io.data.binding.complex.GML2Handler;
 import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
@@ -152,7 +153,7 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
             }
         }
 
-        org.geotools.xml.Parser parser = new org.geotools.xml.Parser(configuration);
+        Parser parser = new Parser(configuration);
 
         parser.setStrict(shouldSetParserStrict);
 
@@ -173,7 +174,7 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
      */
     public SimpleFeatureCollection parseFeatureCollection(File file, Configuration configuration, boolean shouldSetParserStrict) {
 
-        org.geotools.xml.Parser parser = new org.geotools.xml.Parser(configuration);
+        Parser parser = new Parser(configuration);
 
         parser.setStrict(shouldSetParserStrict);
 

@@ -169,7 +169,7 @@ public class GML2BasicParser extends AbstractPropertiesInputOutputHandler implem
 
             SimpleFeatureIterator featureIterator = fc.features();
             while (featureIterator.hasNext()) {
-                SimpleFeature feature = (SimpleFeature) featureIterator.next();
+                SimpleFeature feature = featureIterator.next();
                 if (feature.getDefaultGeometry() == null) {
                     Collection<org.opengis.feature.Property> properties = feature
                             .getProperties();

@@ -2,11 +2,11 @@
     <gml:featureMembers>
         <topp:tasmania_roads gml:id="tasmania_roads.14">
             <topp:the_geom>
-                <gml:MultiLineString srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                <gml:MultiLineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
                     <gml:lineStringMember>
-                        <gml:LineString srsDimension="2">
+                        <gml:LineString srsDimension="3">
                             <gml:posList>
-                                51.9372804 8.9648438 48.1906245 8.1359841 52.1932595 7.9135563 51.8357234 7.7135134 50.1358123 6.9246124
+                                146.46858200000003 -41.241478 -41.241478 146.574768 -41.251186 -41.251186 146.64041099999997 -41.255154 -41.255154 146.76612899999998 -41.332348 -41.332348 146.79418900000002 -41.34417 -41.34417 146.82217400000002 -41.362988 -41.362988 146.86343399999998 -41.380234 -41.380234 146.899521 -41.379452 -41.379452 146.929504 -41.378227 -41.378227 147.008041 -41.356079 -41.356079 147.098343 -41.362919 -41.362919                                
                             </gml:posList>
                         </gml:LineString>
                     </gml:lineStringMember>

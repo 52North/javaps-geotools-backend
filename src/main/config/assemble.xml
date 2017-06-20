@@ -61,11 +61,12 @@
                 <include>javax.media:jai_core</include>
                 <include>java3d:vecmath</include>
                 <include>net.java.dev.jsr-275:jsr-275</include>
-                <include>jdom:jdom</include>
+                <include>org.jdom:jdom</include>
                 <include>jgridshift:jgridshift</include>
                 <include>picocontainer:picocontainer</include>
-                <include>hsqldb:hsqldb</include>
+                <include>org.hsqldb:hsqldb</include>
                 <include>xerces:xercesImpl</include>
+                <include>com.googlecode.efficient-java-matrix-library:ejml</include>
 
             </includes>
             <outputDirectory>deploy-to-javaps</outputDirectory>

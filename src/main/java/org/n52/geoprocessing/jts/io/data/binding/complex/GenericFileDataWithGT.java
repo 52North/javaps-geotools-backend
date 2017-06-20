@@ -272,7 +272,8 @@ public class GenericFileDataWithGT {
             SimpleFeature newSf = build.buildFeature(sf.getIdentifier()
                     .getID());
 
-            modifiedFeatureCollection.add(newSf);
+            // TODO: find new approach to add items to featurecollection instead of deprecated .add
+            //modifiedFeatureCollection.add(newSf);
         }
 
         try {
