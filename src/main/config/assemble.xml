@@ -58,7 +58,6 @@
                 <include>xalan:xalan</include>
                 <include>xalan:serializer</include>
 
-                <include>org.apache.httpcomponents:httpcore</include>
                 <include>xml-apis:xml-apis:</include>
                 <include>javax.media:jai_core</include>
                 <include>net.java.dev.jsr-275:jsr-275</include>
