@@ -1,4 +1,4 @@
-# javaps-jts-backend
+# javaps-geotools-backend
 Processing backend for javaPS containing parsers/generators and processes build upon the Java Topology Suite
 
 ### Quick Start
