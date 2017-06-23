@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.algorithm;
+package org.n52.geoprocessing.geotools.algorithm;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -33,8 +33,8 @@ import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTHelper;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.javaps.algorithm.annotation.ComplexOutput;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
@@ -46,7 +46,7 @@ import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
 /**
- * This algorithm is a testdummy
+ * This algorithm transforms GML featureCollection from a source epsg into a GML featureCollection of a target_epsg
  *
  * @author Maurin Radtke (m.radtke@52north.org)
  *

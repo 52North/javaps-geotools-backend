@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.wps.io.test.datahandler.generator;
+package org.n52.geoprocessing.geotools.test.datahandler.generator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,15 +26,15 @@ import java.net.URLDecoder;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
-import org.n52.geoprocessing.jts.algorithm.AlgorithmTest;
-import org.n52.geoprocessing.jts.io.datahandler.generator.GML3BasicGenerator;
-import org.n52.geoprocessing.jts.io.datahandler.parser.GML3BasicParser;
+import org.n52.geoprocessing.geotools.test.algorithm.AlgorithmTest;
+import org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator;
+import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.fail;
 import org.junit.Test;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.javaps.description.TypedProcessInputDescription;
 import org.n52.shetland.ogc.wps.Format;
 

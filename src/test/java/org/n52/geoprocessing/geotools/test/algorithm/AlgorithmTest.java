@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.algorithm;
+package org.n52.geoprocessing.geotools.test.algorithm;
 
+import org.n52.geoprocessing.geotools.algorithm.JTSCoordinationTransformationAlgorithm;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import java.net.URLDecoder;
@@ -26,10 +27,11 @@ import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.junit.Before;
 import org.junit.Test;
+import org.n52.geoprocessing.geotools.algorithm.JTSCoordinationTransformationAlgorithm;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
-import org.n52.geoprocessing.jts.io.datahandler.generator.GML3BasicGenerator;
-import org.n52.geoprocessing.jts.io.datahandler.parser.GML3BasicParser;
+import org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator;
+import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

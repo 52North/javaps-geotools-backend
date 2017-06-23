@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.io.data.binding.complex;
+package org.n52.geoprocessing.geotools.io.data.binding.complex;
 
 
 import java.util.Enumeration;

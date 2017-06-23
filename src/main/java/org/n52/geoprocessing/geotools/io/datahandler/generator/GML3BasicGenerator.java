@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.io.datahandler.generator;
+package org.n52.geoprocessing.geotools.io.datahandler.generator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,10 +43,9 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.FeatureType;
 
 import com.vividsolutions.jts.geom.Geometry;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTHelper;
-
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
-import org.n52.geoprocessing.jts.io.data.binding.complex.SchemaRepository;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.SchemaRepository;
 import org.n52.javaps.annotation.Properties;
 import org.n52.javaps.description.TypedProcessOutputDescription;
 import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;

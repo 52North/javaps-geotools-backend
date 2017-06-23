@@ -7,7 +7,7 @@ Use git to clone the repository:
 Then just run ``` mvn clean install ``` on the repositories root directory.
 
 ### Execute-request
-In order to execute a JTSCoordinationTransformationAlgorithm, you must specify three inputs and one output:
+In order to execute a JTSCoordinationTransformationAlgorithm request, you must specify three inputs and one output:
 * The input coordinates as valid GML being referenced with ```id="data"```:
 
 In this example, we choose the tasmania_roads dataset as a reference from [http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3](http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3).

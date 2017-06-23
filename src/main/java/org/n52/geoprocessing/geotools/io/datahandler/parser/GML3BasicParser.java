@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geoprocessing.jts.io.datahandler.parser;
+package org.n52.geoprocessing.geotools.io.datahandler.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,9 +55,9 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.vividsolutions.jts.geom.Geometry;
 import org.geotools.xml.Parser;
 
-import org.n52.geoprocessing.jts.io.data.binding.complex.GML2Handler;
-import org.n52.geoprocessing.jts.io.data.binding.complex.GTVectorDataBinding;
-import org.n52.geoprocessing.jts.io.data.binding.complex.SchemaRepository;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GML2Handler;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.SchemaRepository;
 
 import org.n52.javaps.annotation.Properties;
 import org.n52.javaps.description.TypedProcessInputDescription;
