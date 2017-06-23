@@ -81,6 +81,8 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
 
     public GML3BasicParser() {
         super();
+        // Setting the system-wide default at startup time
+        System.setProperty("org.geotools.referencing.forceXY", "true");
         addSupportedBinding(GTVectorDataBinding.class);
     }
 

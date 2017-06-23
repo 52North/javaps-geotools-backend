@@ -44,6 +44,8 @@
                 <include>org.geotools.xsd:gt-xsd-gml2</include>
                 <include>org.geotools.xsd:gt-xsd-gml3</include>
 
+                <include>com.googlecode.efficient-java-matrix-library:core</include>
+
                 <include>commons-io:commons-io</include>
                 <include>commons-collections:commons-collections</include>
                 <include>commons-jxpath:commons-jxpath</include>
@@ -59,14 +61,11 @@
                 <include>org.apache.httpcomponents:httpcore</include>
                 <include>xml-apis:xml-apis:</include>
                 <include>javax.media:jai_core</include>
-                <include>java3d:vecmath</include>
                 <include>net.java.dev.jsr-275:jsr-275</include>
                 <include>org.jdom:jdom</include>
                 <include>jgridshift:jgridshift</include>
                 <include>picocontainer:picocontainer</include>
                 <include>org.hsqldb:hsqldb</include>
-                <include>xerces:xercesImpl</include>
-                <include>com.googlecode.efficient-java-matrix-library:ejml</include>
 
             </includes>
             <outputDirectory>deploy-to-javaps</outputDirectory>

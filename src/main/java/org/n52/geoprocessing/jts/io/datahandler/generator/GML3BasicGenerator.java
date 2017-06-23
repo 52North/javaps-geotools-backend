@@ -92,11 +92,11 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
         while (iterator.hasNext()) {
             SimpleFeature feature = (SimpleFeature) iterator.next();
 
-            if (i == 0) {
+            //if (i == 0) {
                 featureType = GTHelper.createFeatureType(feature.getProperties(), (Geometry) feature.getDefaultGeometry(), uuid, feature.getFeatureType().getCoordinateReferenceSystem());
                 QName qname = GTHelper.createGML3SchemaForFeatureType(featureType);
                 SchemaRepository.registerSchemaLocation(qname.getNamespaceURI(), qname.getLocalPart());
-            }
+            //}
             SimpleFeature resultFeature = GTHelper.createFeature("ID" + i, (Geometry) feature.getDefaultGeometry(), featureType, feature.getProperties());
 
             simpleFeatureList.add(resultFeature);
@@ -170,6 +170,7 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
         String uuid = UUID.randomUUID().toString();
         File file = File.createTempFile("gml3" + uuid, ".xml");
         FileOutputStream outputStream = new FileOutputStream(file);
+        GTVectorDataBinding blub = (GTVectorDataBinding) data;
         this.writeToStream( ((GTVectorDataBinding) data).getPayload() , outputStream);
         outputStream.flush();
         outputStream.close();

@@ -131,13 +131,58 @@
             <artifactId>commons-io</artifactId>
             <version>2.1</version>
         </dependency>
-        <!-- START import geotools dependencies -->
         <!-- https://mvnrepository.com/artifact/com.googlecode.efficient-java-matrix-library/ejml -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.googlecode.efficient-java-matrix-library</groupId>
-            <artifactId>ejml</artifactId>
-            <version>0.16</version>
-        </dependency>-->
+            <artifactId>core</artifactId>
+            <version>0.26</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>all</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>core</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>dense64</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>denseC64</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>simple</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>experimental</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>equation</artifactId>
+            <version>0.27</version>
+            <scope>runtime</scope>
+        </dependency>
+        -->
+        <!-- START import geotools dependencies -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>geotools</artifactId>
@@ -176,16 +221,6 @@
             <groupId>org.geotools.xsd</groupId>
             <artifactId>gt-xsd-core</artifactId>
             <version>${geotools.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>xml-apis-xerces</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xml-apis</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <artifactId>gt-epsg-hsql</artifactId>

@@ -28,6 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
+import org.n52.geoprocessing.jts.io.datahandler.generator.GML3BasicGenerator;
 import org.n52.geoprocessing.jts.io.datahandler.parser.GML3BasicParser;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
@@ -47,8 +48,6 @@ public class AlgorithmTest {
 
     @Before
     public void setUp() {
-        // Setting the system-wide default at startup time
-        System.setProperty("org.geotools.referencing.forceXY", "true");
         algo = new JTSCoordinationTransformationAlgorithm();
         algo.setSourceEPSG("EPSG:4326");
 
@@ -158,6 +157,7 @@ public class AlgorithmTest {
             assertEquals(7.70767521468, coords[3].y, 0.001);
             assertEquals(39.4162959551, coords[4].x, 0.001);
             assertEquals(6.91879868251, coords[4].y, 0.001);
+            FeatureCollection result = algo.getResult();
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
         }

@@ -40,7 +40,6 @@ import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.opengis.feature.type.FeatureType;
 import org.opengis.filter.Filter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
@@ -159,7 +158,7 @@ public class JTSCoordinationTransformationAlgorithm {
         } catch (TransformException te) {
             throw new RuntimeException("Error while transforming: " + te.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Exception while transforming: " + e.getMessage(),  e);
+            throw new RuntimeException("Exception while transforming: " + e.getMessage(), e);
         }
 
         ListFeatureCollection lfc = new ListFeatureCollection(ft, listOut);
@@ -172,11 +171,9 @@ public class JTSCoordinationTransformationAlgorithm {
             CoordinateReferenceSystem crs, Collection<Property> properties) {
         String uuid = UUID.randomUUID().toString();
 
-        if (featureType == null) {
-            featureType = GTHelper.createFeatureType(properties,
-                    geometry, uuid, crs);
-            GTHelper.createGML3SchemaForFeatureType(featureType);
-        }
+        featureType = GTHelper.createFeatureType(properties,
+                geometry, uuid, crs);
+        GTHelper.createGML3SchemaForFeatureType(featureType);
 
         Feature feature = GTHelper.createFeature(id, geometry, featureType,
                 properties);
