@@ -19,7 +19,7 @@ In this example, we choose the tasmania_roads dataset as a reference from [http:
 
 * The EPSG Code of the reference stystem of your source coordinates being referenced with ```id="source_epsg"```:
 
-In this example, we choose the epsg code 4326, because the referenced tasmania_roads dataset is specified in that coordinate reference system.
+In this example, we choose the epsg code 4326, because the referenced tasmania_roads dataset is specified by that coordinate reference system.
 ```xml
 <wps:Input id="source_epsg">
     <wps:Data mimeType="text/plain">EPSG:4326</wps:Data>
