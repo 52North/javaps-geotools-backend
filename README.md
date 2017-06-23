@@ -17,6 +17,7 @@ In this example, we choose the tasmania_roads dataset as a reference from [http:
 ```
 
 * The EPSG Code of the reference stystem of your source coordinates references with ```id="source_epsg"```:
+
 In this example, we choose the epsg code 4326, because the referenced tasmania_roads dataset is specified in that coordinate reference system.
 ```xml
 <wps:Input id="source_epsg">
@@ -25,6 +26,7 @@ In this example, we choose the epsg code 4326, because the referenced tasmania_r
 ```
 
 * The EPSG Code of the reference stystem of your target coordinates references with ```id="target_epsg"```:
+
 In this example, we choose the epsg code 3857, in which we want the data to be transformed to.
 ```xml
 <wps:Input id="target_epsg">
@@ -33,6 +35,7 @@ In this example, we choose the epsg code 3857, in which we want the data to be t
 ```
 
 * The output format in which we specify mimeType, schema, and transmission referenced with ```id="result"```:
+
 In this example, we choose the default text/xml mimeType, gml 3.1.1 schema and value-transmission.
 ```xml
 <!-- Uses default output format -->
