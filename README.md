@@ -8,7 +8,7 @@ Then just run ``` mvn clean install ``` on the repositories root directory.
 
 ### Execute-request
 In order to execute a JTSCoordinationTransformationAlgorithm, you must specify three inputs and one output:
-* The input coordinates as valid GML references with ```id="data"```:
+* The input coordinates as valid GML being referenced with ```id="data"```:
 
 In this example, we choose the tasmania_roads dataset as a reference from [http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3](http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3).
 ```xml
@@ -17,7 +17,7 @@ In this example, we choose the tasmania_roads dataset as a reference from [http:
 </wps:Input>
 ```
 
-* The EPSG Code of the reference stystem of your source coordinates references with ```id="source_epsg"```:
+* The EPSG Code of the reference stystem of your source coordinates being referenced with ```id="source_epsg"```:
 
 In this example, we choose the epsg code 4326, because the referenced tasmania_roads dataset is specified in that coordinate reference system.
 ```xml
@@ -26,7 +26,7 @@ In this example, we choose the epsg code 4326, because the referenced tasmania_r
 </wps:Input>
 ```
 
-* The EPSG Code of the reference stystem of your target coordinates references with ```id="target_epsg"```:
+* The EPSG Code of the reference stystem of your target coordinates being referenced with ```id="target_epsg"```:
 
 In this example, we choose the epsg code 3857, in which we want the data to be transformed to.
 ```xml
