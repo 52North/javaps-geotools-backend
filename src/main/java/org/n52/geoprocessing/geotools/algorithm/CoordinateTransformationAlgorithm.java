@@ -52,7 +52,7 @@ import org.opengis.referencing.operation.TransformException;
  *
  */
 @Algorithm(version = "1.1.0")
-public class JTSCoordinationTransformationAlgorithm {
+public class CoordinateTransformationAlgorithm {
 
     private String target_epsg;
     private String source_epsg;

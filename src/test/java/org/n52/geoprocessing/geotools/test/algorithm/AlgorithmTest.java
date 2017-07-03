@@ -16,7 +16,7 @@
  */
 package org.n52.geoprocessing.geotools.test.algorithm;
 
-import org.n52.geoprocessing.geotools.algorithm.JTSCoordinationTransformationAlgorithm;
+import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import java.net.URLDecoder;
@@ -27,7 +27,7 @@ import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.junit.Before;
 import org.junit.Test;
-import org.n52.geoprocessing.geotools.algorithm.JTSCoordinationTransformationAlgorithm;
+import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator;
@@ -45,12 +45,12 @@ public class AlgorithmTest {
     Logger LOGGER = LoggerFactory.getLogger(AlgorithmTest.class);
     String projectRoot = "";
 
-    JTSCoordinationTransformationAlgorithm algo = null;
+    CoordinateTransformationAlgorithm algo = null;
     SimpleFeatureCollection sfc = null;
 
     @Before
     public void setUp() {
-        algo = new JTSCoordinationTransformationAlgorithm();
+        algo = new CoordinateTransformationAlgorithm();
         algo.setSourceEPSG("EPSG:4326");
 
         File f = new File(this.getClass().getProtectionDomain().getCodeSource()
