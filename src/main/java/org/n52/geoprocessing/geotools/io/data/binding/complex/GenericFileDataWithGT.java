@@ -16,8 +16,6 @@
  */
 package org.n52.geoprocessing.geotools.io.data.binding.complex;
 
-import org.n52.geoprocessing.geotools.io.datahandler.parser.GML2BasicParser;
-import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +33,7 @@ import org.geotools.data.DefaultTransaction;
 import org.geotools.data.FeatureStore;
 import org.geotools.data.Transaction;
 import org.geotools.data.shapefile.ShapefileDataStore;
+import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.feature.DefaultFeatureCollection;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
@@ -45,6 +44,8 @@ import org.geotools.feature.type.GeometryDescriptorImpl;
 import org.geotools.feature.type.GeometryTypeImpl;
 import org.geotools.filter.identity.GmlObjectIdImpl;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
+import org.n52.geoprocessing.geotools.io.datahandler.parser.GML2BasicParser;
+import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
 import org.opengis.feature.GeometryAttribute;
 import org.opengis.feature.IllegalAttributeException;
 import org.opengis.feature.Property;
@@ -402,7 +403,7 @@ public class GenericFileDataWithGT {
 
             try {
                 DataStore store = new ShapefileDataStore(shpFile.toURI().toURL());
-                FeatureCollection<?, ?> features = store.getFeatureSource(
+                SimpleFeatureCollection features = store.getFeatureSource(
                         store.getTypeNames()[0]).getFeatures();
                 System.gc();
                 tempDir.delete();

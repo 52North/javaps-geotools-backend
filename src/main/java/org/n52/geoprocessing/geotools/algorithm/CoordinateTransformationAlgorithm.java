@@ -16,26 +16,26 @@
  */
 package org.n52.geoprocessing.geotools.algorithm;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import org.geotools.data.collection.ListFeatureCollection;
-import org.geotools.feature.DefaultFeatureCollections;
-import org.n52.javaps.algorithm.annotation.Algorithm;
-import org.n52.javaps.algorithm.annotation.LiteralInput;
-import org.n52.javaps.algorithm.annotation.Execute;
-import org.n52.javaps.algorithm.annotation.ComplexInput;
 
+import javax.inject.Inject;
+
+import org.geotools.data.collection.ListFeatureCollection;
+import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper;
 import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.javaps.algorithm.annotation.Algorithm;
+import org.n52.javaps.algorithm.annotation.ComplexInput;
 import org.n52.javaps.algorithm.annotation.ComplexOutput;
+import org.n52.javaps.algorithm.annotation.Execute;
+import org.n52.javaps.algorithm.annotation.LiteralInput;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
@@ -44,6 +44,9 @@ import org.opengis.filter.Filter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * This algorithm transforms GML featureCollection from a source epsg into a GML featureCollection of a target_epsg
@@ -56,9 +59,15 @@ public class CoordinateTransformationAlgorithm {
 
     private String target_epsg;
     private String source_epsg;
-    private FeatureCollection<?, ?> data;
-    private FeatureCollection<?, ?> result;
+    private SimpleFeatureCollection data;
+    private SimpleFeatureCollection result;
     private SimpleFeatureType featureType;
+    private GTHelper gtHelper;
+
+    @Inject
+    public void setGTHelper(GTHelper gtHelper){
+        this.gtHelper = gtHelper;
+    }
 
     @LiteralInput(identifier = "source_epsg")
     public void setSourceEPSG(String source_epsg) {
@@ -71,12 +80,12 @@ public class CoordinateTransformationAlgorithm {
     }
 
     @ComplexInput(identifier = "data", binding = GTVectorDataBinding.class)
-    public void setData(FeatureCollection<?, ?> data) {
+    public void setData(SimpleFeatureCollection data) {
         this.data = data;
     }
 
     @ComplexOutput(identifier = "result", binding = GTVectorDataBinding.class)
-    public FeatureCollection getResult() {
+    public SimpleFeatureCollection getResult() {
         return result;
     }
 
@@ -120,10 +129,8 @@ public class CoordinateTransformationAlgorithm {
         // 3. Transform featureCollection:
         FeatureIterator<?> featureIterator = this.data.features();
 
-        List<SimpleFeature> listOut = new ArrayList();
+        List<SimpleFeature> listOut = new ArrayList<SimpleFeature>();
         SimpleFeatureType ft = null;
-
-        this.result = DefaultFeatureCollections.newCollection();
 
         try {
 
@@ -146,10 +153,17 @@ public class CoordinateTransformationAlgorithm {
                     k = JTS.transform(coordinate, k, tx);
                 }
 
+                if (featureType == null) {
+                    String uuid = UUID.randomUUID().toString();
+
+                    featureType = gtHelper.createFeatureType(feature.getProperties(), geometry, uuid, toCRS);
+                    gtHelper.createGML3SchemaForFeatureType(featureType);
+                }
+
                 Geometry newGeometry = JTS.transform(geometry, tx);
 
                 Feature newFeature = createFeature(feature.getID(),
-                        newGeometry, toCRS, feature.getProperties());
+                        newGeometry, feature.getProperties());
 
                 ft = ((SimpleFeature) newFeature).getType();
                 listOut.add((SimpleFeature) newFeature);
@@ -167,15 +181,9 @@ public class CoordinateTransformationAlgorithm {
 
     }
 
-    private Feature createFeature(String id, Geometry geometry,
-            CoordinateReferenceSystem crs, Collection<Property> properties) {
-        String uuid = UUID.randomUUID().toString();
+    private Feature createFeature(String id, Geometry geometry, Collection<Property> properties) {
 
-        featureType = GTHelper.createFeatureType(properties,
-                geometry, uuid, crs);
-        GTHelper.createGML3SchemaForFeatureType(featureType);
-
-        Feature feature = GTHelper.createFeature(id, geometry, featureType,
+        Feature feature = gtHelper.createFeature(id, geometry, featureType,
                 properties);
 
         return feature;

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.Collection;
 
@@ -30,6 +31,10 @@ import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.geotools.gml2.SrsSyntax;
 import org.geotools.referencing.CRS;
+import org.n52.faroe.Validation;
+import org.n52.faroe.annotation.Configurable;
+import org.n52.faroe.annotation.Setting;
+import org.n52.iceland.service.ServiceSettings;
 //import org.n52.wps.commons.WPSConfig;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
@@ -55,11 +60,23 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 
+@Configurable
 public class GTHelper {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GTHelper.class);
+    private String serviceURL;
 
-    public static SimpleFeatureType createFeatureType(Collection<Property> attributes, Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem) {
+    @Setting(ServiceSettings.SERVICE_URL)
+    public void setServiceURL(URI serviceURL) {
+        Validation.notNull("serviceURL", serviceURL);
+        String url = serviceURL.toString();
+        if (url.contains("?")) {
+            url = url.split("[?]")[0];
+        }
+        this.serviceURL = url;
+    }
+
+    public SimpleFeatureType createFeatureType(Collection<Property> attributes, Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem) {
         String namespace = "http://www.52north.org/" + uuid;
 
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
@@ -137,7 +154,7 @@ public class GTHelper {
         return featureType;
     }
 
-    public static SimpleFeatureType createFeatureType(Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem) {
+    public SimpleFeatureType createFeatureType(Geometry newGeometry, String uuid, CoordinateReferenceSystem coordinateReferenceSystem) {
         String namespace = "http://www.52north.org/" + uuid;
 
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
@@ -157,7 +174,7 @@ public class GTHelper {
         return featureType;
     }
 
-    public static SimpleFeature createFeature(String id, Geometry geometry, SimpleFeatureType featureType, Collection<Property> originalAttributes) {
+    public SimpleFeature createFeature(String id, Geometry geometry, SimpleFeatureType featureType, Collection<Property> originalAttributes) {
 
         if (geometry == null || geometry.isEmpty()) {
             return null;
@@ -207,7 +224,7 @@ public class GTHelper {
         return feature;
     }
 
-    public static Feature createFeature(String id, Geometry geometry, SimpleFeatureType featureType) {
+    public Feature createFeature(String id, Geometry geometry, SimpleFeatureType featureType) {
 
         if (geometry == null || geometry.isEmpty()) {
             return null;
@@ -241,7 +258,7 @@ public class GTHelper {
         return feature;
     }
 
-    public static QName createGML3SchemaForFeatureType(SimpleFeatureType featureType) {
+    public QName createGML3SchemaForFeatureType(SimpleFeatureType featureType) {
 
         String uuid = featureType.getName().getNamespaceURI().replace("http://www.52north.org/", "");
         String namespace = "http://www.52north.org/" + uuid;
@@ -310,6 +327,13 @@ public class GTHelper {
                     schema = schema + "<xs:element name=\"" + attributeName + "\" minOccurs=\"0\" maxOccurs=\"1\"> "
                             + "<xs:simpleType> ";
                     schema = schema + "<xs:restriction base=\"xs:double\"> "
+                            + "</xs:restriction> "
+                            + "</xs:simpleType> "
+                            + "</xs:element> ";
+                } else if (property.getType().getBinding().equals(Long.class)) {
+                    schema = schema + "<xs:element name=\"" + attributeName + "\" minOccurs=\"0\" maxOccurs=\"1\"> "
+                            + "<xs:simpleType> ";
+                    schema = schema + "<xs:restriction base=\"xs:long\"> "
                             + "</xs:restriction> "
                             + "</xs:simpleType> "
                             + "</xs:element> ";
@@ -407,10 +431,10 @@ public class GTHelper {
 
             }*/
 
-    public static String storeSchema(String schema, String uuid) throws IOException {
+    public String storeSchema(String schema, String uuid) throws IOException {
 
-        //String domain = WPSConfig.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-        String domain = "";
+        String domain = GTHelper.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+
         domain = URLDecoder.decode(domain, "UTF-8");
 
         int startIndex = domain.indexOf("WEB-INF");
@@ -439,22 +463,22 @@ public class GTHelper {
             writer.close();
 
             //String url = WPSConfig.getServerBaseURL()+"/schemas/"+ uuid+".xsd";
-            String url = "/schemas/" + uuid + ".xsd";
+            String url = serviceURL.replace("service", "") + "schemas/" + uuid + ".xsd";
             return url;
         }
     }
 
-    private static CoordinateReferenceSystem getDefaultCRS() {
+    private CoordinateReferenceSystem getDefaultCRS() {
 
         try {
-            return CRS.decode(":4326");
+            return CRS.decode("EPSG:4326");
         } catch (Exception e) {
-            LOGGER.error("Exception while decoding CRS :4326", e);
+            LOGGER.error("Exception while decoding CRS EPSG:4326", e);
         }
         return null;
     }
 
-    public static SrsSyntax getSrsSyntaxFromString(String syntaxString) {
+    public SrsSyntax getSrsSyntaxFromString(String syntaxString) {
         return SrsSyntax.valueOf(syntaxString);
     }
 

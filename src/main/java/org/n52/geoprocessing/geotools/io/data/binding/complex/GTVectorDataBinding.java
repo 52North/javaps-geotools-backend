@@ -19,26 +19,31 @@ package org.n52.geoprocessing.geotools.io.data.binding.complex;
 import java.io.File;
 import java.io.IOException;
 
-import org.geotools.feature.FeatureCollection;
+import org.geotools.data.simple.SimpleFeatureCollection;
 import org.n52.javaps.io.complex.ComplexData;
 
 //import org.n52.wps.io.datahandler.generator.SimpleGMLGenerator;
 //import org.n52.wps.io.datahandler.parser.SimpleGMLParser;
 
-public class GTVectorDataBinding implements ComplexData<FeatureCollection> {
+public class GTVectorDataBinding implements ComplexData<SimpleFeatureCollection> {
 
 
-    protected transient FeatureCollection<?, ?> featureCollection;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -7498123687332359504L;
 
-    public GTVectorDataBinding(FeatureCollection<?, ?> payload) {
+    protected transient SimpleFeatureCollection featureCollection;
+
+    public GTVectorDataBinding(SimpleFeatureCollection payload) {
         this.featureCollection = payload;
     }
 
     public Class<?> getSupportedClass() {
-        return FeatureCollection.class;
+        return SimpleFeatureCollection.class;
     }
 
-    public FeatureCollection<?, ?> getPayload() {
+    public SimpleFeatureCollection getPayload() {
         return this.featureCollection;
     }
 

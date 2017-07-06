@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.xml.namespace.QName;
 
 import org.slf4j.Logger;
@@ -66,6 +67,13 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
 
     private SrsSyntax srsSyntax = null;
 
+    private GTHelper gtHelper;
+
+    @Inject
+    public void setGTHelper(GTHelper gtHelper){
+        this.gtHelper = gtHelper;
+    }
+
     public GML3BasicGenerator() {
         super();
         addSupportedBinding(GTVectorDataBinding.class);
@@ -92,11 +100,11 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
             SimpleFeature feature = (SimpleFeature) iterator.next();
 
             //if (i == 0) {
-                featureType = GTHelper.createFeatureType(feature.getProperties(), (Geometry) feature.getDefaultGeometry(), uuid, feature.getFeatureType().getCoordinateReferenceSystem());
-                QName qname = GTHelper.createGML3SchemaForFeatureType(featureType);
+                featureType = gtHelper.createFeatureType(feature.getProperties(), (Geometry) feature.getDefaultGeometry(), uuid, feature.getFeatureType().getCoordinateReferenceSystem());
+                QName qname = gtHelper.createGML3SchemaForFeatureType(featureType);
                 SchemaRepository.registerSchemaLocation(qname.getNamespaceURI(), qname.getLocalPart());
             //}
-            SimpleFeature resultFeature = GTHelper.createFeature("ID" + i, (Geometry) feature.getDefaultGeometry(), featureType, feature.getProperties());
+            SimpleFeature resultFeature = gtHelper.createFeature("ID" + i, (Geometry) feature.getDefaultGeometry(), featureType, feature.getProperties());
 
             simpleFeatureList.add(resultFeature);
             i++;
@@ -169,7 +177,6 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
         String uuid = UUID.randomUUID().toString();
         File file = File.createTempFile("gml3" + uuid, ".xml");
         FileOutputStream outputStream = new FileOutputStream(file);
-        GTVectorDataBinding blub = (GTVectorDataBinding) data;
         this.writeToStream( ((GTVectorDataBinding) data).getPayload() , outputStream);
         outputStream.flush();
         outputStream.close();

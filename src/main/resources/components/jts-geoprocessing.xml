@@ -25,6 +25,7 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
+	<bean id="gtHelper" class="org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper" />
 	<bean id="GML3BasicGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator" />
 	<bean id="GML3BasicParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser" />
 	<bean id="jtsCoordinationTransformationAlgorithm" class="org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm" />

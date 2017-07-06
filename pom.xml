@@ -138,58 +138,14 @@
             <version>0.26</version>
             <scope>runtime</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>all</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>core</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>dense64</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>denseC64</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>simple</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>experimental</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>equation</artifactId>
-            <version>0.27</version>
-            <scope>runtime</scope>
-        </dependency>
-        -->
         <!-- START import geotools dependencies -->
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>geotools</artifactId>
-            <version>${geotools.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.geotools</groupId> -->
+<!--             <artifactId>geotools</artifactId> -->
+<!--             <version>${geotools.version}</version> -->
+<!--             <type>pom</type> -->
+<!--             <scope>import</scope> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-main</artifactId>
@@ -317,7 +273,6 @@
         <dependency>
             <groupId>org.n52.shetland</groupId>
             <artifactId>shetland</artifactId>
-            <version>1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -331,14 +286,24 @@
         <dependency>
             <artifactId>stax-api</artifactId>
             <groupId>stax</groupId>
-            <version>1.0.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>httpcore</artifactId>
             <groupId>org.apache.httpcomponents</groupId>
-            <version>4.4.3</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <artifactId>faroe-annotations</artifactId>
+            <groupId>org.n52.faroe</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>faroe-utils</artifactId>
+            <groupId>org.n52.faroe</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>javax.inject</artifactId>
+            <groupId>javax.inject</groupId>
         </dependency>
     </dependencies>
     <build>
