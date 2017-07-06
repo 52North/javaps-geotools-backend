@@ -1,5 +1,5 @@
 # javaps-geotools-backend
-Processing backend for javaPS containing parsers/generators and processes build upon the Java Topology Suite
+Processing backend for javaPS containing parsers/generators and processes build upon the GeoTools and the Java Topology Suite
 
 ### Quick Start
 Use git to clone the repository:
@@ -7,7 +7,7 @@ Use git to clone the repository:
 Then just run ``` mvn clean install ``` on the repositories root directory.
 
 ### Execute-request
-In order to execute a JTSCoordinationTransformationAlgorithm request, you must specify three inputs and one output:
+In order to execute an CoordinateTransformationAlgorithm request, you must specify three inputs and one output:
 * The input coordinates as valid GML being referenced with ```id="data"```:
 
 In this example, we choose the tasmania_roads dataset as a reference from [http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3](http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=topp:tasmania_roads&SRS=EPSG:4326&OUTPUTFORMAT=GML3).
@@ -54,7 +54,7 @@ The full execute-request for the example inputs and output then is:
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.opengis.net/wps/2.0 http://schemas.opengis.net/wps/2.0/wpsExecute.xsd"
  service="WPS" version="2.0.0" response="document" mode="sync">
-    <ows:Identifier>org.n52.geoprocessing.jts.algorithm.JTSCoordinationTransformationAlgorithm</ows:Identifier>
+    <ows:Identifier>org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm</ows:Identifier>
     <wps:Input id="data">
         <wps:Reference xlink:href="http://geoprocessing.demo.52north.org:8080/geoserver/wfs?SERVICE=WFS&amp;VERSION=1.0.0&amp;REQUEST=GetFeature&amp;TYPENAME=topp:tasmania_roads&amp;SRS=EPSG:4326&amp;OUTPUTFORMAT=GML3" mimeType="text/xml" schema="http://schemas.opengis.net/gml/3.1.1/base/feature.xsd" />
     </wps:Input>
