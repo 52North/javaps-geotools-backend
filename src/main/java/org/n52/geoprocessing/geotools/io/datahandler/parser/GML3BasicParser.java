@@ -21,19 +21,18 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.xml.namespace.QName;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.geotools.data.collection.ListFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureCollection;
-import org.geotools.feature.DefaultFeatureCollections;
+import org.geotools.feature.DefaultFeatureCollection;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.feature.GeometryAttributeImpl;
@@ -43,6 +42,16 @@ import org.geotools.filter.identity.GmlObjectIdImpl;
 import org.geotools.gml3.ApplicationSchemaConfiguration;
 import org.geotools.gml3.GMLConfiguration;
 import org.geotools.xml.Configuration;
+import org.geotools.xml.Parser;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GML2Handler;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.SchemaRepository;
+import org.n52.javaps.annotation.Properties;
+import org.n52.javaps.description.TypedProcessInputDescription;
+import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
+import org.n52.javaps.io.DecodingException;
+import org.n52.javaps.io.InputHandler;
+import org.n52.shetland.ogc.wps.Format;
 import org.opengis.feature.GeometryAttribute;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
@@ -50,22 +59,11 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.GeometryDescriptor;
 import org.opengis.feature.type.GeometryType;
 import org.opengis.filter.identity.Identifier;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.helpers.DefaultHandler;
+
 import com.vividsolutions.jts.geom.Geometry;
-import org.geotools.xml.Parser;
-
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GML2Handler;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.SchemaRepository;
-
-import org.n52.javaps.annotation.Properties;
-import org.n52.javaps.description.TypedProcessInputDescription;
-import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
-import org.n52.javaps.io.DecodingException;
-import org.n52.javaps.io.InputHandler;
-
-import org.n52.shetland.ogc.wps.Format;
 
 /**
  * This parser handles xml files compliant to gmlpacket.xsd
@@ -81,8 +79,6 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
 
     public GML3BasicParser() {
         super();
-        // Setting the system-wide default at startup time
-        System.setProperty("org.geotools.referencing.forceXY", "true");
         addSupportedBinding(GTVectorDataBinding.class);
     }
 
@@ -155,10 +151,6 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
             }
         }
 
-        Parser parser = new Parser(configuration);
-
-        parser.setStrict(shouldSetParserStrict);
-
         //parse
         SimpleFeatureCollection fc = parseFeatureCollection(file, configuration, shouldSetParserStrict);
 
@@ -181,7 +173,7 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
         parser.setStrict(shouldSetParserStrict);
 
         //parse
-        SimpleFeatureCollection fc = DefaultFeatureCollections.newCollection();
+        SimpleFeatureCollection fc = new DefaultFeatureCollection(null,null);
         try {
             Object parsedData = parser.parse(new FileInputStream(file));
             if (parsedData instanceof FeatureCollection) {
@@ -278,6 +270,7 @@ public class GML3BasicParser extends AbstractPropertiesInputOutputHandler implem
             if (schemaUrl == null) {
                 return null;
             }
+            schemaUrl = URLDecoder.decode(schemaUrl, "UTF-8");
             String namespaceURI = handler.getNameSpaceURI();
             return new QName(namespaceURI, schemaUrl);
 

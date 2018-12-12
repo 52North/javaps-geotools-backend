@@ -99,11 +99,11 @@ public class GML3BasicGenerator extends AbstractPropertiesInputOutputHandler imp
         while (iterator.hasNext()) {
             SimpleFeature feature = (SimpleFeature) iterator.next();
 
-            //if (i == 0) {
+            if (i == 0) {
                 featureType = gtHelper.createFeatureType(feature.getProperties(), (Geometry) feature.getDefaultGeometry(), uuid, feature.getFeatureType().getCoordinateReferenceSystem());
                 QName qname = gtHelper.createGML3SchemaForFeatureType(featureType);
                 SchemaRepository.registerSchemaLocation(qname.getNamespaceURI(), qname.getLocalPart());
-            //}
+            }
             SimpleFeature resultFeature = gtHelper.createFeature("ID" + i, (Geometry) feature.getDefaultGeometry(), featureType, feature.getProperties());
 
             simpleFeatureList.add(resultFeature);

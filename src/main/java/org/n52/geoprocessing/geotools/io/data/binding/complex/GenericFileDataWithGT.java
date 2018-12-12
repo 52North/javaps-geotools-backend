@@ -155,21 +155,12 @@ public class GenericFileDataWithGT {
     }
 
     /**
-     * public GenericFileDataWithGT(GridCoverage2D payload, String mimeType) {
+     * @param collection The feature collection
      *
-     * dataStream = null; fileExtension = "tiff"; this.mimeType = mimeType;
+     * @return Java file pointing to the created shape file
      *
-     * try { GeotiffGenerator generator = new GeotiffGenerator(); primaryFile =
-     * File.createTempFile("primary", ".tif");//changed to .tif FileOutputStream
-     * outputStream = new FileOutputStream(primaryFile);
-     *
-     * InputStream is = generator.generateStream(new
-     * GTRasterDataBinding(payload), mimeType, null);
-     * IOUtils.copy(is,outputStream); is.close();
-     *
-     * } catch (IOException e){ LOGGER.error("Could not generate GeoTiff."); }
-     *
-     * }
+     * @throws IOException
+     * @throws IllegalAttributeException
      */
     public static File getShpFile(FeatureCollection<?, ?> collection)
             throws IOException, IllegalAttributeException {

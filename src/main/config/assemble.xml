@@ -50,6 +50,7 @@
                 <include>commons-collections:commons-collections</include>
                 <include>commons-jxpath:commons-jxpath</include>
                 <include>commons-pool:commons-pool</include>
+                <include>com.vividsolutions:jts</include>
 
                 <include>org.eclipse.emf:common</include>
                 <include>org.eclipse.emf:ecore</include>
@@ -58,7 +59,7 @@
                 <include>xalan:xalan</include>
                 <include>xalan:serializer</include>
 
-                <include>xml-apis:xml-apis:</include>
+                <include>java3d:vecmath</include>
                 <include>javax.media:jai_core</include>
                 <include>net.java.dev.jsr-275:jsr-275</include>
                 <include>org.jdom:jdom</include>

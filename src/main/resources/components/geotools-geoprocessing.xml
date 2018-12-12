@@ -25,9 +25,16 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
-	<bean id="gtHelper" class="org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper" />
+	<bean id="gtHelper" class="org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper" init-method="init" />
 	<bean id="GML3BasicGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator" />
+	<bean id="geoJONGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GeoJSONGenerator" />
+	<bean id="GTBinZippedSHPGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GTBinZippedSHPGenerator" />
+	<bean id="GTBinDirectorySHPGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GTBinDirectorySHPGenerator" />
 	<bean id="GML3BasicParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser" />
+	<bean id="GML2BasicParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GML2BasicParser" />
+	<bean id="geoJSONParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GeoJSONParser" />
+	<bean id="GTBinZippedSHPParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GTBinZippedSHPParser" />
 	<bean id="jtsCoordinationTransformationAlgorithm" class="org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm" />
+	<bean id="simpleBufferAlgorithm" class="org.n52.wps.server.algorithm.SimpleBufferAlgorithm" />
 
 </beans>
