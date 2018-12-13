@@ -50,17 +50,23 @@ This project includes:
   Feature Based Graphs and Networks under Lesser General Public License (LGPL)
   FindBugs-jsr305 under The Apache Software License, Version 2.0
   GeoJSON Support under Lesser General Public License (LGPL)
+  GeoTIFF grid coverage exchange module under Lesser General Public License (LGPL)
   GML2 XML Support under Lesser General Public License (LGPL)
   GML3 XML Support under Lesser General Public License (LGPL)
+  Grid Coverage module under Lesser General Public License (LGPL)
   Guava InternalFutureFailureAccess and InternalFutures under The Apache Software License, Version 2.0
   Guava ListenableFuture only under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
   HyperSQL Database under HSQLDB License, a BSD open source license
+  Image I/O-Extensions - utilities classes and methods under Lesser General Public License (LGPL)
+  Improved TIFF Plugin under Lesser General Public License (LGPL)
   J2ObjC Annotations under The Apache Software License, Version 2.0
   Jackson-annotations under The Apache Software License, Version 2.0
   Jackson-core under The Apache Software License, Version 2.0
   jackson-databind under The Apache Software License, Version 2.0
+  jai_codec under Java Advanced Imaging Distribution License, http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt
   jai_core under Java Advanced Imaging Distribution License, http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt
+  jai_imageio under Java Advanced Imaging Distribution License, http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt
   Java Architecture for XML Binding under CDDL 1.1 or GPL2 w/ CPE
   JavaBeans(TM) Activation Framework under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
   javaPS GEOTools process repository under The Apache Software License, Version 2.0
@@ -88,9 +94,9 @@ This project includes:
   Spring Context under Apache License, Version 2.0
   Spring Core under Apache License, Version 2.0
   Spring Expression Language (SpEL) under Apache License, Version 2.0
-  Spring Web under Apache License, Version 2.0
   Spring Web MVC under Apache License, Version 2.0
   StAX API under The Apache Software License, Version 2.0
+  Support and utility classes under Simplified BSD
   vecmath under Sun Binary Code License Agreement
   Xalan Java under The Apache Software License, Version 2.0
   Xalan Java Serializer under The Apache Software License, Version 2.0
@@ -99,4 +105,5 @@ This project includes:
   XML Pull Parsing API under Public Domain
   XmlBeans under The Apache Software License, Version 2.0
   xsd under Eclipse Public License (EPL)
+  ZonalStats operator under Simplified BSD
 

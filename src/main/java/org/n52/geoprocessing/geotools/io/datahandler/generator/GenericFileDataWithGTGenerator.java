@@ -19,7 +19,6 @@ package org.n52.geoprocessing.geotools.io.datahandler.generator;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GenericFileDataWithGT;
 import org.n52.geoprocessing.geotools.io.data.binding.complex.GenericFileDataWithGTBinding;
 import org.n52.javaps.annotation.Properties;
 import org.n52.javaps.description.TypedProcessOutputDescription;
@@ -45,18 +44,6 @@ public class GenericFileDataWithGTGenerator extends AbstractPropertiesInputOutpu
 
         InputStream theStream = ((GenericFileDataWithGTBinding)data).getPayload().getDataStream();
         return theStream;
-    }
-
-    /**
-     * conversion method to support translation of output formats
-     * TODO: implement logic
-     *
-     * @param inputFile
-     * @return
-     */
-    private GenericFileDataWithGT convertFile (GenericFileDataWithGT inputFile){
-        //not implemented
-        return null;
     }
 
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2016 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven />
+
+	<bean id="gtHelper" class="org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper" init-method="init" />
+	<bean id="GML3BasicGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator" />
+	<bean id="geoJONGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GeoJSONGenerator" />
+	<bean id="GTBinZippedSHPGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GTBinZippedSHPGenerator" />
+	<bean id="GTBinDirectorySHPGenerator" class="org.n52.geoprocessing.geotools.io.datahandler.generator.GTBinDirectorySHPGenerator" />
+	<bean id="GML3BasicParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser" />
+	<bean id="GML2BasicParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GML2BasicParser" />
+	<bean id="geoJSONParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GeoJSONParser" />
+	<bean id="GTBinZippedSHPParser" class="org.n52.geoprocessing.geotools.io.datahandler.parser.GTBinZippedSHPParser" />
+	<bean id="jtsCoordinationTransformationAlgorithm" class="org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm" />
+	<bean id="simpleBufferAlgorithm" class="org.n52.wps.server.algorithm.SimpleBufferAlgorithm" />
+
+</beans>

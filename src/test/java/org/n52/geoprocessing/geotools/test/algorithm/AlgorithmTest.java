@@ -16,41 +16,53 @@
  */
 package org.n52.geoprocessing.geotools.test.algorithm;
 
-import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import java.net.URLDecoder;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import javax.inject.Inject;
+
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
-import org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator;
 import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  *
  * @author Maurin Radtke (m.radtke@52north.org)
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath*:geotools-geoprocessing.xml")
 public class AlgorithmTest {
 
     Logger LOGGER = LoggerFactory.getLogger(AlgorithmTest.class);
     String projectRoot = "";
 
-    CoordinateTransformationAlgorithm algo = null;
+    @Inject
+    GML3BasicParser dataHandler;
+
+    @Inject
+    CoordinateTransformationAlgorithm algo;
+
     SimpleFeatureCollection sfc = null;
 
     @Before
     public void setUp() {
-        algo = new CoordinateTransformationAlgorithm();
         algo.setSourceEPSG("EPSG:4326");
 
         File f = new File(this.getClass().getProtectionDomain().getCodeSource()
@@ -65,8 +77,6 @@ public class AlgorithmTest {
         } catch (UnsupportedEncodingException e) {
             fail(e.getMessage());
         };
-
-        GML3BasicParser dataHandler = new GML3BasicParser();
 
         File testFile = new File(testFilePath);
         sfc = dataHandler.parseFeatureCollection(testFile);

@@ -16,36 +16,45 @@
  */
 package org.n52.geoprocessing.geotools.test.datahandler.generator;
 
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
-import org.n52.geoprocessing.geotools.test.algorithm.AlgorithmTest;
+import javax.inject.Inject;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.geoprocessing.geotools.io.datahandler.generator.GML3BasicGenerator;
 import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import static org.junit.Assert.fail;
-import org.junit.Test;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.geoprocessing.geotools.test.algorithm.AlgorithmTest;
 import org.n52.javaps.description.TypedProcessInputDescription;
 import org.n52.shetland.ogc.wps.Format;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Maurin Radtke (m.radtke@52north.org)
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath*:geotools-geoprocessing.xml")
 public class GML3BasicGeneratorTest {
 
     Logger LOGGER = LoggerFactory.getLogger(AlgorithmTest.class);
     String projectRoot = "";
+
+    @Inject
     GML3BasicGenerator dataHandler;
 
     @Test
@@ -79,7 +88,6 @@ public class GML3BasicGeneratorTest {
         Format format = new Format("text/xml", "subtype=gml/3.2.1", "http://schemas.opengis.net/gml/3.2.1/base/feature.xsd");
 
         // for (String mimetype : mimetypes) {
-        dataHandler = new GML3BasicGenerator();
         try {
             GTVectorDataBinding theBinding = theParser.parse(tpid, input, format);
 
