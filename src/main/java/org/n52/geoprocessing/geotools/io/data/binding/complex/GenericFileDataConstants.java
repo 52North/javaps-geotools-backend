@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 52°North Initiative for Geospatial Open Source
+ * Copyright 2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ public final class GenericFileDataConstants {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GenericFileDataConstants.class);
 
-    //public static final String MIME_TYPE_ZIPPED_SHP = IOHandler.MIME_TYPE_ZIPPED_SHP;
+    public static final String MIME_TYPE_ZIPPED_SHP = "application/x-zipped-shp";
     public static final String MIME_TYPE_SHP = "application/shp";
     public static final String MIME_TYPE_HDF = "application/img";
     public static final String MIME_TYPE_GEOTIFF = "application/geotiff";
