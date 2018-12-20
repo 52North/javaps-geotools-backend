@@ -20,6 +20,7 @@ This project includes:
   52°North Faroe JSON Backend under The Apache Software License, Version 2.0
   52°North Faroe Utilities under The Apache Software License, Version 2.0
   52°North Iceland under The Apache Software License, Version 2.0
+  52°North Iceland Streaming Interfaces under The Apache Software License, Version 2.0
   52°North Jan Mayen under The Apache Software License, Version 2.0
   52°North javaPS Processing API Implementation under The Apache Software License, Version 2.0
   52°North Shetland under The Apache Software License, Version 2.0
@@ -32,7 +33,6 @@ This project includes:
   Apache HttpClient under Apache License, Version 2.0
   Apache HttpCore under Apache License, Version 2.0
   API interfaces under Lesser General Public License (LGPL)
-  Checker Qual under The MIT License
   common under Eclipse Public License (EPL)
   Commons IO under The Apache Software License, Version 2.0
   Commons JXPath under The Apache Software License, Version 2.0
@@ -54,8 +54,6 @@ This project includes:
   GML2 XML Support under Lesser General Public License (LGPL)
   GML3 XML Support under Lesser General Public License (LGPL)
   Grid Coverage module under Lesser General Public License (LGPL)
-  Guava InternalFutureFailureAccess and InternalFutures under The Apache Software License, Version 2.0
-  Guava ListenableFuture only under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
   HyperSQL Database under HSQLDB License, a BSD open source license
   Image I/O-Extensions - utilities classes and methods under Lesser General Public License (LGPL)
@@ -69,15 +67,18 @@ This project includes:
   jai_imageio under Java Advanced Imaging Distribution License, http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt
   Java Architecture for XML Binding under CDDL 1.1 or GPL2 w/ CPE
   JavaBeans(TM) Activation Framework under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
+  javaPS GenericFileData handler under The Apache Software License, Version 2.0
   javaPS GEOTools process repository under The Apache Software License, Version 2.0
-  javaPS JTS process repository under The Apache Software License, Version 2.0
+  javaPS Input-/Outputhandler with GeoTools under The Apache Software License, Version 2.0
   javax.inject under The Apache Software License, Version 2.0
   JCL 1.2 implemented over SLF4J under MIT License
   JDOM under Similar to Apache License but with the acknowledgment clause removed
   jgridshift under GNU Lesser General Public License, version 2.0 (LGPLv2)
+  Joda-Time under Apache 2
   JSON.simple under The Apache Software License, Version 2.0
   jsr-275 under BSD License
   JTS Topology Suite under Lesser General Public License (LGPL)
+  KML XML Support under Lesser General Public License (LGPL)
   Main module under Lesser General Public License (LGPL)
   Metadata under Lesser General Public License (LGPL)
   Old JAXB Core under CDDL+GPL License
@@ -94,13 +95,13 @@ This project includes:
   Spring Context under Apache License, Version 2.0
   Spring Core under Apache License, Version 2.0
   Spring Expression Language (SpEL) under Apache License, Version 2.0
+  Spring Web under Apache License, Version 2.0
   Spring Web MVC under Apache License, Version 2.0
   StAX API under The Apache Software License, Version 2.0
   Support and utility classes under Simplified BSD
   vecmath under Sun Binary Code License Agreement
-  Xalan Java under The Apache Software License, Version 2.0
-  Xalan Java Serializer under The Apache Software License, Version 2.0
   Xerces2-j under The Apache Software License, Version 2.0
+  XML Commons External Components XML APIs under The Apache Software License, Version 2.0 or The SAX License or The W3C License
   XML Parsing under Lesser General Public License (LGPL)
   XML Pull Parsing API under Public Domain
   XmlBeans under The Apache Software License, Version 2.0

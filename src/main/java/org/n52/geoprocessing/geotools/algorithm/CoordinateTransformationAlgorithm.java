@@ -26,27 +26,23 @@ import javax.inject.Inject;
 import org.geotools.data.collection.ListFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
-import org.geotools.feature.FeatureCollection;
-import org.geotools.feature.FeatureIterator;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
 import org.n52.javaps.algorithm.annotation.Algorithm;
 import org.n52.javaps.algorithm.annotation.ComplexInput;
 import org.n52.javaps.algorithm.annotation.ComplexOutput;
 import org.n52.javaps.algorithm.annotation.Execute;
 import org.n52.javaps.algorithm.annotation.LiteralInput;
+import org.n52.javaps.gt.io.GTHelper;
+import org.n52.javaps.gt.io.data.binding.complex.GTVectorDataBinding;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.opengis.filter.Filter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
-import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 
 /**

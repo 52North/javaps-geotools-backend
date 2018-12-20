@@ -25,15 +25,14 @@ import javax.xml.namespace.QName;
 
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
-import org.geotools.feature.FeatureIterator;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTHelper;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.GTVectorDataBinding;
-import org.n52.geoprocessing.geotools.io.data.binding.complex.SchemaRepository;
 import org.n52.javaps.algorithm.annotation.Algorithm;
 import org.n52.javaps.algorithm.annotation.ComplexInput;
 import org.n52.javaps.algorithm.annotation.ComplexOutput;
 import org.n52.javaps.algorithm.annotation.Execute;
 import org.n52.javaps.algorithm.annotation.LiteralInput;
+import org.n52.javaps.gt.io.GTHelper;
+import org.n52.javaps.gt.io.data.binding.complex.GTVectorDataBinding;
+import org.n52.javaps.io.SchemaRepository;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
@@ -81,13 +80,6 @@ public class SimpleBufferAlgorithm {
     @Execute
     public void runBuffer() {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        //Collection resultColl = new ArrayList();
         double i = 0;
         int totalNumberOfFeatures = data.size();
         String uuid = UUID.randomUUID().toString();
@@ -100,7 +92,6 @@ public class SimpleBufferAlgorithm {
              */
             i = i + 1;
             percentage = (i / totalNumberOfFeatures) * 100;
-//            this.update(new Integer(percentage.intValue()));
 
             /**
              * ******************
@@ -138,7 +129,7 @@ public class SimpleBufferAlgorithm {
             buffered = a.buffer(width);
             return buffered;
         } catch (RuntimeException ex) {
-            // simply eat exceptions and report them by returning null
+            LOGGER.trace(ex.getMessage());
         }
         return null;
     }

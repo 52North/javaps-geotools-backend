@@ -26,18 +26,15 @@ import java.net.URLDecoder;
 import javax.inject.Inject;
 
 import org.geotools.data.simple.SimpleFeatureCollection;
-import org.geotools.feature.FeatureCollection;
-import org.geotools.feature.FeatureIterator;
+import org.geotools.data.simple.SimpleFeatureIterator;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
-import org.n52.geoprocessing.geotools.io.datahandler.parser.GML3BasicParser;
+import org.n52.javaps.gt.io.datahandler.parser.GML3BasicParser;
+import org.n52.javaps.test.AbstractTestCase;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -46,9 +43,7 @@ import com.vividsolutions.jts.geom.Geometry;
  *
  * @author Maurin Radtke (m.radtke@52north.org)
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:geotools-geoprocessing.xml")
-public class AlgorithmTest {
+public class AlgorithmTest extends AbstractTestCase{
 
     Logger LOGGER = LoggerFactory.getLogger(AlgorithmTest.class);
     String projectRoot = "";
@@ -63,6 +58,7 @@ public class AlgorithmTest {
 
     @Before
     public void setUp() {
+        System.setProperty("org.geotools.referencing.forceXY", "true");
         algo.setSourceEPSG("EPSG:4326");
 
         File f = new File(this.getClass().getProtectionDomain().getCodeSource()
@@ -98,8 +94,6 @@ public class AlgorithmTest {
             fail(e.getMessage());
         };
 
-        GML3BasicParser dataHandler = new GML3BasicParser();
-
         File testFile = new File(testFilePath);
         sfc = dataHandler.parseFeatureCollection(testFile);
         algo.setData(sfc);
@@ -125,9 +119,9 @@ public class AlgorithmTest {
 
         try {
             algo.runAlgorithm();
-            FeatureCollection fc = algo.getResult();
-            FeatureIterator<?> featureIterator = fc.features();
-            SimpleFeature feature = (SimpleFeature) featureIterator.next();
+            SimpleFeatureCollection fc = algo.getResult();
+            SimpleFeatureIterator featureIterator = fc.features();
+            SimpleFeature feature = featureIterator.next();
             Geometry geometry = (Geometry) feature.getDefaultGeometry();
             Coordinate[] coords = geometry.getCoordinates();
             assertEquals(5781631.60732, coords[0].x, 0.001);
@@ -154,9 +148,9 @@ public class AlgorithmTest {
 
         try {
             algo.runAlgorithm();
-            FeatureCollection fc = algo.getResult();
-            FeatureIterator<?> featureIterator = fc.features();
-            SimpleFeature feature = (SimpleFeature) featureIterator.next();
+            SimpleFeatureCollection fc = algo.getResult();
+            SimpleFeatureIterator featureIterator = fc.features();
+            SimpleFeature feature = featureIterator.next();
             Geometry geometry = (Geometry) feature.getDefaultGeometry();
             Coordinate[] coords = geometry.getCoordinates();
             assertEquals(41.2178843506, coords[0].x, 0.001);
@@ -169,7 +163,6 @@ public class AlgorithmTest {
             assertEquals(7.70767521468, coords[3].y, 0.001);
             assertEquals(39.4162959551, coords[4].x, 0.001);
             assertEquals(6.91879868251, coords[4].y, 0.001);
-            FeatureCollection result = algo.getResult();
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
         }
