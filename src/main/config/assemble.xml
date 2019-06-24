@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2018 52°North Initiative for Geospatial Open Source
+    Copyright 2019 52°North Initiative for Geospatial Open Source
     Software GmbH
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,8 @@
         <dependencySet>
             <includes>
                 <include>org.n52.geoprocessing:javaps-geotools-backend</include>
+				<include>org.n52.geoprocessing:javaps-iohandler-gt</include>
+				<include>org.n52.geoprocessing:javaps-iohandler</include>
 
                 <include>org.geotools:gt-api</include>
                 <include>org.geotools:gt-main</include>
@@ -38,11 +40,14 @@
                 <include>org.geotools:gt-shapefile</include>
                 <include>org.geotools:gt-epsg-hsql</include>
                 <include>org.geotools:gt-data</include>
-                <include>org.geotools:gt-graph</include>
+                <include>org.geotools:gt-geotiff</include>
+                <include>org.geotools:gt-coverage</include>
+<!--                 <include>org.geotools:gt-graph</include> -->
                 <include>org.geotools:gt-metadata</include>
                 <include>org.geotools.xsd:gt-xsd-core</include>
                 <include>org.geotools.xsd:gt-xsd-gml2</include>
                 <include>org.geotools.xsd:gt-xsd-gml3</include>
+                <include>org.geotools.xsd:gt-xsd-kml</include>
 
                 <include>com.googlecode.efficient-java-matrix-library:core</include>
 
@@ -50,24 +55,28 @@
                 <include>commons-collections:commons-collections</include>
                 <include>commons-jxpath:commons-jxpath</include>
                 <include>commons-pool:commons-pool</include>
-                <include>com.vividsolutions:jts</include>
+                <include>org.locationtech.jts:jts-core</include>
+                <include>si.uom:si-quantity</include>
+                <include>si.uom:si-units-java8</include>
+                <include>tec.uom:uom-se</include>
+                <include>tec.uom.lib:uom-lib-common</include>
+                <include>systems.uom:systems-common-java8</include>
 
-                <include>org.eclipse.emf:common</include>
-                <include>org.eclipse.emf:ecore</include>
-                <include>org.eclipse.xsd:xsd</include>
+                <include>org.eclipse.emf:org.eclipse.emf.common</include>
+                <include>org.eclipse.emf:org.eclipse.emf.ecore</include>
+                <include>org.eclipse.xsd:org.eclipse.xsd</include>
 
-                <include>xalan:xalan</include>
-                <include>xalan:serializer</include>
+<!--                 <include>xalan:xalan</include> -->
+<!--                 <include>xalan:serializer</include> -->
 
                 <include>java3d:vecmath</include>
                 <include>javax.media:jai_core</include>
-                <include>net.java.dev.jsr-275:jsr-275</include>
-                <include>org.jdom:jdom</include>
+                <include>javax.measure:unit-api</include>
+<!--                 <include>org.jdom:jdom</include> -->
                 <include>jgridshift:jgridshift</include>
                 <include>picocontainer:picocontainer</include>
                 <include>org.hsqldb:hsqldb</include>
                 <include>org.apache.httpcomponents:httpcore</include>
-
             </includes>
             <outputDirectory>deploy-to-javaps</outputDirectory>
         </dependencySet>

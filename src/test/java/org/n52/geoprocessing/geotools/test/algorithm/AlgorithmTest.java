@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,15 +29,14 @@ import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.junit.Before;
 import org.junit.Test;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 import org.n52.geoprocessing.geotools.algorithm.CoordinateTransformationAlgorithm;
 import org.n52.javaps.gt.io.datahandler.parser.GML3BasicParser;
 import org.n52.javaps.test.AbstractTestCase;
 import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
 
 /**
  *

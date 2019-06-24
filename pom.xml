@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2018 52°North Initiative for Geospatial Open Source
+    Copyright 2019 52°North Initiative for Geospatial Open Source
     Software GmbH
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,51 +16,19 @@
     limitations under the License.
 
 -->
-<!-- Copyright 2018 52°North Initiative for Geospatial Open Source Software 
-	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you 
-	may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-	required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
-<!-- Copyright 2018 52°North Initiative for Geospatial Open Source Software 
-	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you 
-	may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-	required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
-<!-- Copyright 2018 52°North Initiative for Geospatial Open Source Software 
-	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you 
-	may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-	required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
-<!-- Copyright 2018 52°North Initiative for Geospatial Open Source Software 
-	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you 
-	may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-	required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.n52.wps</groupId>
 		<artifactId>javaPS</artifactId>
-		<version>1.1.2-SNAPSHOT</version>
+		<version>1.3.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.geoprocessing</groupId>
 	<artifactId>javaps-geotools-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>javaPS GEOTools process repository</name>
+	<version>1.3.0-SNAPSHOT</version>
+	<name>javaPS GeoTools process repository</name>
 
 	<inceptionYear>2016</inceptionYear>
 
@@ -88,10 +56,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
-		<version.geotools>13.5</version.geotools>
-		<currentYear>2018</currentYear> <!-- manual setting -->
+		<version.geotools>20.2</version.geotools>
+		<currentYear>2019</currentYear> <!-- manual setting -->
 		<maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
 		<currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
+        <version.iohandler.gt>1.3.0-SNAPSHOT</version.iohandler.gt>
 	</properties>
 
 	<scm>
@@ -136,12 +105,12 @@
 		<dependency>
 			<groupId>org.n52.wps</groupId>
 			<artifactId>engine</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.n52.geoprocessing</groupId>
 			<artifactId>javaps-iohandler-gt</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${version.iohandler.gt}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -167,8 +136,8 @@
 			<version>${version.geotools}</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>jts</artifactId>
-					<groupId>com.vividsolutions</groupId>
+					<artifactId>jts-core</artifactId>
+					<groupId>org.locationtech.jts</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -178,8 +147,8 @@
 			<version>${version.geotools}</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>jts</artifactId>
-					<groupId>com.vividsolutions</groupId>
+					<artifactId>jts-core</artifactId>
+					<groupId>org.locationtech.jts</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -194,9 +163,9 @@
 			<version>${version.geotools}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.vividsolutions</groupId>
-			<artifactId>jts</artifactId>
-			<version>1.13</version>
+			<artifactId>jts-core</artifactId>
+			<groupId>org.locationtech.jts</groupId>
+			<version>1.16.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -211,7 +180,7 @@
 		<dependency>
 			<groupId>org.n52.geoprocessing</groupId>
 			<artifactId>javaps-unit-test-environment</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -268,7 +237,7 @@
 					</includes>
 					<strictCheck>true</strictCheck>
 					<properties>
-						<year>2018</year>
+						<year>2019</year>
 					</properties>
 					<mapping>
 						<java>SLASHSTAR_STYLE</java>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ import javax.xml.namespace.QName;
 
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
+import org.locationtech.jts.geom.Geometry;
 import org.n52.javaps.algorithm.annotation.Algorithm;
 import org.n52.javaps.algorithm.annotation.ComplexInput;
 import org.n52.javaps.algorithm.annotation.ComplexOutput;
@@ -39,40 +40,47 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vividsolutions.jts.geom.Geometry;
-
-
-@Algorithm(version = "1.1.0")
+@Algorithm(
+        version = "1.1.0")
 public class SimpleBufferAlgorithm {
 
     private static Logger LOGGER = LoggerFactory.getLogger(SimpleBufferAlgorithm.class);
+
     private Double percentage;
+
+    private SimpleFeatureCollection result;
+
+    private SimpleFeatureCollection data;
+
+    private double width;
+
+    private GTHelper gtHelper;
 
     public SimpleBufferAlgorithm() {
         super();
     }
 
-    private SimpleFeatureCollection result;
-    private SimpleFeatureCollection data;
-    private double width;
-    private GTHelper gtHelper;
-
     @Inject
-    public void setGTHelper(GTHelper gtHelper){
+    public void setGTHelper(GTHelper gtHelper) {
         this.gtHelper = gtHelper;
     }
 
-    @ComplexOutput(identifier = "result", binding = GTVectorDataBinding.class)
+    @ComplexOutput(
+            identifier = "result",
+            binding = GTVectorDataBinding.class)
     public SimpleFeatureCollection getResult() {
         return result;
     }
 
-    @ComplexInput(identifier = "data", binding = GTVectorDataBinding.class)
+    @ComplexInput(
+            identifier = "data",
+            binding = GTVectorDataBinding.class)
     public void setData(SimpleFeatureCollection data) {
         this.data = data;
     }
 
-    @LiteralInput(identifier = "width")
+    @LiteralInput(
+            identifier = "width")
     public void setWidth(double width) {
         this.width = width;
     }
@@ -80,7 +88,7 @@ public class SimpleBufferAlgorithm {
     @Execute
     public void runBuffer() {
 
-        double i = 0;
+        int i = 0;
         int totalNumberOfFeatures = data.size();
         String uuid = UUID.randomUUID().toString();
         List<SimpleFeature> featureList = new ArrayList<>();
@@ -91,7 +99,7 @@ public class SimpleBufferAlgorithm {
              * ******* How to publish percentage results ************
              */
             i = i + 1;
-            percentage = (i / totalNumberOfFeatures) * 100;
+            percentage = (double) ((i / totalNumberOfFeatures) * 100);
 
             /**
              * ******************
@@ -103,7 +111,7 @@ public class SimpleBufferAlgorithm {
             if (i == 1) {
                 CoordinateReferenceSystem crs = feature.getFeatureType().getCoordinateReferenceSystem();
                 if (geometry.getUserData() instanceof CoordinateReferenceSystem) {
-                    crs = ((CoordinateReferenceSystem) geometry.getUserData());
+                    crs = (CoordinateReferenceSystem) geometry.getUserData();
                 }
                 featureType = gtHelper.createFeatureType(feature.getProperties(), geometryBuffered, uuid, crs);
                 QName qname = gtHelper.createGML3SchemaForFeatureType(featureType);
@@ -112,7 +120,8 @@ public class SimpleBufferAlgorithm {
             }
 
             if (geometryBuffered != null) {
-                SimpleFeature createdFeature = (SimpleFeature) gtHelper.createFeature("ID" + new Double(i).intValue(), geometryBuffered, (SimpleFeatureType) featureType, feature.getProperties());
+                SimpleFeature createdFeature = (SimpleFeature) gtHelper.createFeature("ID" + i,
+                        geometryBuffered, (SimpleFeatureType) featureType, feature.getProperties());
                 feature.setDefaultGeometry(geometryBuffered);
                 featureList.add(createdFeature);
             } else {
@@ -122,7 +131,8 @@ public class SimpleBufferAlgorithm {
         result = gtHelper.createSimpleFeatureCollectionFromSimpleFeatureList(featureList);
     }
 
-    private Geometry runBuffer(Geometry a, double width) {
+    private Geometry runBuffer(Geometry a,
+            double width) {
         Geometry buffered = null;
 
         try {
