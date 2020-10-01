@@ -65,7 +65,7 @@ public class AlgorithmTest extends AbstractTestCase{
 
         projectRoot = f.getParentFile().getParentFile().getParent();
         String testFilePath = projectRoot
-                + "\\javaps-geotools-backend\\src\\test\\resources\\gml_example_1.gml";
+                + "/javaps-geotools-backend/src/test/resources/gml_example_1.gml";
 
         try {
             testFilePath = URLDecoder.decode(testFilePath, "UTF-8");
@@ -85,7 +85,7 @@ public class AlgorithmTest extends AbstractTestCase{
     @Test
     public void testFailTransform() {
         String testFilePath = projectRoot
-                + "\\javaps-geotools-backend\\src\\test\\resources\\gml_example.gml";
+                + "/javaps-geotools-backend/src/test/resources/gml_example.gml";
 
         try {
             testFilePath = URLDecoder.decode(testFilePath, "UTF-8");
