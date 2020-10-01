@@ -34,20 +34,19 @@
 
 	<developers>
 		<developer>
-			<id>MojioMS</id>
-			<name>Maurin Radtke</name>
-			<email>m.radtke@52north.org</email>
-			<organization>${project.organization.name}</organization>
-			<organizationUrl>${project.organization.url}</organizationUrl>
-			<timezone>GMT+1</timezone>
-		</developer>
-		<developer>
 			<id>bpross-52n</id>
 			<name>Benjamin Pross</name>
 			<email>b.pross@52north.org</email>
 			<organization>${project.organization.name}</organization>
 			<organizationUrl>${project.organization.url}</organizationUrl>
 			<timezone>GMT+1</timezone>
+		</developer>
+		<developer>
+			<id>MojioMS</id>
+			<name>Maurin Radtke</name>
+			<roles>
+				<role>retired</role>
+			</roles>
 		</developer>
 	</developers>
 	<packaging>jar</packaging>
